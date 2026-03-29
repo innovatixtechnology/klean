@@ -1,0 +1,9 @@
+{
+  "Hero": {
+    "heading": "NextJS Boilerplate template"
+  },
+  "ComingSoon": {
+    "heading": "Coming Soon",
+    "message": "We're working hard to bring you something amazing. Stay tuned!"
+  }
+}
