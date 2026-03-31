@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { siteConfig } from "@/constants";
 import NavMenu from "../Layout/NavMenu";
+import MobileNav from "../Layout/MobileNav";
 
 export default function Hero() {
   return (
@@ -19,23 +20,25 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60" />
       </div>
 
-      {/* Header - Transparent and Responsive */}
-      <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 lg:px-16 lg:py-8">
-        <div className="flex items-center mix-blend-screen">
-          <a href="/" className="text-3xl lg:text-4xl text-white font-black tracking-tighter hover:opacity-90 transition-opacity">
-            {siteConfig.shortName}
-            <span className="text-blue-500">.</span>
-          </a>
-        </div>
+      <header className="absolute top-0 left-0 right-0 z-50">
+        <nav className="flex items-center justify-between px-6 py-6 lg:px-16 lg:py-8">
+          <div className="flex items-center mix-blend-screen bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+            <a href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95">
+              {siteConfig.shortName.toUpperCase()}
+              <span className="text-primary/70">.</span>
+            </a>
+          </div>
 
-        {/* Navigation - Hidden on mobile/small tablets */}
-        <NavMenu />
+          {/* Responsive Menu Navigation */}
+          <NavMenu />
 
-        <div className="hidden lg:flex items-center gap-4">
-          <a href="#contact" className="hidden sm:inline-flex bg-primary hover:bg-primary/80 text-white px-7 py-2.5 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
-            Contact
-          </a>
-        </div>
+          <div className="flex items-center gap-4">
+             <a href="#contact" className="hidden sm:inline-flex bg-primary hover:bg-primary/80 text-white px-7 py-2.5 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
+               Contact
+             </a>
+             <MobileNav />
+          </div>
+        </nav>
       </header>
 
       {/* Core Content: Scalable and Responsive typography */}
@@ -50,7 +53,7 @@ export default function Hero() {
             Redefining Cleanliness
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.1] tracking-tighter">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[1.05] tracking-tighter">
             ELEVATE YOUR <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-indigo-400">ENVIRONMENT</span>
           </h1>

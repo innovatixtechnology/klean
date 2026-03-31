@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/constants";
 import { cn } from "@/lib/utils";
 import NavMenu from "./NavMenu";
+import MobileNav from "./MobileNav";
 
 export default function Header() {
   const [show, setShow] = useState(false);
@@ -22,22 +23,25 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full bg-transparent backdrop-blur-md shadow-md transition-transform duration-500 transform",
+        "sticky top-0 z-50 w-full bg-black/20 backdrop-blur-xl shadow-md transition-all duration-500 transform",
         show || !["/"].includes(pathName)
-          ? "translate-y-0 opacity-100"
+          ? "translate-y-0 opacity-100 py-3 md:py-4"
           : "-translate-y-full opacity-0 h-0",
       )}>
-      <div className="flex items-center justify-between lg:px-16 p-4">
-        <div className="flex justify-between items-center mix-blend-screen">
-          <a href="/" className="text-4xl text-white font-extrabold">
-            {siteConfig.shortName}
+      <div className="flex items-center justify-between px-6 lg:px-16 mx-auto max-w-[1920px]">
+        <div className="flex justify-between items-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+          <a href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95">
+            {siteConfig.shortName.toUpperCase()}<span className="text-primary/70">.</span>
           </a>
         </div>
+
         <NavMenu />
-        <div className="hidden lg:flex items-center">
-          <a href="#contact" className="hidden sm:inline-flex bg-primary hover:bg-primary/80 text-white px-7 py-2.5 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/20">
-            Contact
-          </a>
+
+        <div className="flex items-center gap-4">
+           <a href="#contact" className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-bold text-sm transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-primary/20">
+             Contact
+           </a>
+           <MobileNav />
         </div>
       </div>
     </header>

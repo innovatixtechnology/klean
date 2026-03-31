@@ -39,29 +39,54 @@ export const SERVICES = [
   }
 ];
 
+export const NAV_ITEMS = [
+  {
+    text: "Milestones",
+    path: "/milestones",
+  },
+  {
+    text: "Services",
+    path: "/services",
+  },
+  {
+    text: "Media Coverage",
+    path: "/media-coverage",
+  },
+  {
+    text: "Reviews",
+    path: "/reviews",
+  },
+];
+
 export const CATEGORY = [
   {
-    text: "Male Grooming",
-    img: "/images/male-grooming.webp"
-  },
-  {
-    text: "Male Spa",
-    img: "/images/male-spa.webp"
-  },
-  {
-    text: "Hair Services",
-    img: "/images/hair-services.webp"
-  },
-  {
-    text: "Makeup at Home",
+    text: "Cleaning Service",
+    slug: "cleaning-service",
     img: "/images/make-up.webp"
   },
   {
-    text: "Pre Bridal",
-    img: "/images/pre-bridal.webp"
+    text: "Beauty & Wellness(Men & Women)",
+    slug: "beauty-wellness",
+    img: "/images/male-grooming.webp"
   },
   {
-    text: "Mehendi at Home",
+    text: "Electrical, Plumber, Carpenter & Painter",
+    slug: "electrical-plumber-carpenter-painter",
     img: "/images/mehndi.webp"
-  }
+  },
+  {
+    text: "Instant Help Services",
+    slug: "instant-help-services",
+    img: "/images/male-spa.webp"
+  },
+  {
+    text: "Home Appliances Repair",
+    slug: "home-appliances-repair",
+    img: "/images/hair-services.webp"
+  },
+  {
+    text: "Pest Control & Waterproofing",
+    slug: "pest-control-waterproofing",
+    img: "/images/pre-bridal.webp"
+  },
 ]

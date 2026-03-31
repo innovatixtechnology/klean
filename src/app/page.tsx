@@ -1,6 +1,7 @@
 import Banner from "@/components/sections/Banner";
 import Hero from "@/components/sections/Hero";
 import Media from "@/components/sections/Media";
+import Review from "@/components/sections/Review";
 import Service from "@/components/sections/Service";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Service />
       <Banner />
       <Media />
+      <Review />
     </>
   );
 }
