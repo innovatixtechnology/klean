@@ -32,6 +32,11 @@ const baseConfig: NextConfig = {
         hostname: "picsum.photos",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.facebook.com",
+        pathname: "/**",
+      }
     ],
   },
   transpilePackages: ["geist"],

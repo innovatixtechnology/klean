@@ -1,10 +1,22 @@
 "use client"
 
+import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
+
 export const metadata = {
-    title: 'Error',
+  title: 'Error',
 };
 
-const ErrorPage = () => {
+interface ErrorPageProps {
+  error: Error & { digest?: string };
+}
+
+const ErrorPage = ({ error }: ErrorPageProps) => {
+
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <section
       id="error"

@@ -7,6 +7,8 @@ import { rootMetadata, siteConfig } from "@/config";
 import { geistMono, geistSans } from "@/lib/fonts";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
+import Analytics from "@/components/Analytics/Analytics";
+import { PostHogProvider } from "@/components/Analytics/PostHogProvider";
 
 export const metadata: Metadata = { ...rootMetadata };
 
@@ -29,19 +31,25 @@ export const viewport: Viewport = {
 
 interface Props {
   children: React.ReactNode;
+  modal: React.ReactNode;
+
 }
 
-export default function RootLayout({ children }: Readonly<Props>) {
+export default function RootLayout({ children, modal }: Readonly<Props>) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh antialiased`}>
         <NextTopLoader color="var(--primary)" showSpinner={false} />
-        <Header />
-        <main className="flex-grow relative z-10">{children}</main>
-        <Footer />
-        <ScrollToTop />
+        <PostHogProvider>
+          <Header />
+          <main className="flex-grow relative z-10">{children}</main>
+          {modal}
+          <Footer />
+          <ScrollToTop />
+        </PostHogProvider>
+        <Analytics />
       </body>
     </html>
   );

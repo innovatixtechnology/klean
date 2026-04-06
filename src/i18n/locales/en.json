@@ -1,9 +1,17 @@
 {
   "Hero": {
-    "heading": "NextJS Boilerplate template"
+    "heading-top": "Redefining Everyday Services",
+    "heading-main": "ELEVATE YOUR EVERYDAY LIVING",
+    "heading-sub": "From Cleaning to Care - We Handle It All",
+    "description": "Experiance Premium, reliable, and professionals home services - all under one trusted brand. From deep cleaning to repairs, grooming to daily essentials, Klean simplifies your life with quality you can trust.",
+    "primary-cta": "Book a Service",
+    "secondary-cta": "About Us"
   },
   "ComingSoon": {
     "heading": "Coming Soon",
     "message": "We're working hard to bring you something amazing. Stay tuned!"
+  },
+  "Services": {
+    "heading": "Services we offer"
   }
 }

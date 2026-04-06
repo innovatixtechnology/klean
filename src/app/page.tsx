@@ -1,6 +1,7 @@
+import Achievements from "@/components/sections/Achievements";
 import Banner from "@/components/sections/Banner";
 import Hero from "@/components/sections/Hero";
-import Media from "@/components/sections/Media";
+import Newsletter from "@/components/sections/Newsletter";
 import Review from "@/components/sections/Review";
 import Service from "@/components/sections/Service";
 
@@ -10,8 +11,9 @@ export default function Home() {
       <Hero />
       <Service />
       <Banner />
-      <Media />
       <Review />
+      <Achievements />
+      <Newsletter />
     </>
   );
 }

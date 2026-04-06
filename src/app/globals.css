@@ -111,6 +111,17 @@
     animation: zoomIn 1s ease-out;
   }
 
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  .fade-in-up {
+    opacity: 0;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
   .animate-scroll {
     animation: scroll 30s linear infinite;
   }
@@ -155,6 +166,14 @@
 
   [data-scroll="hidden"][data-scroll-target="zoomIn"] {
     transform: scale(0.95);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   @keyframes gradient {

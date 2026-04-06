@@ -5,7 +5,7 @@ export const siteConfig = {
     alt: "Klean Logo",
   },
   shortName: "Klean",
-  description: "",
+  description: "Klean is your trusted partner for premium home services - from cleaning and repairs to grooming and everyday essentials. We are commited to delivering quality, conveninance, and a seamless experiance to modern homes.",
   emoji: "🧙",
   backgroundColor: "#fff",
   themeColor: "#000",
@@ -21,72 +21,173 @@ export const siteConfig = {
   },
 };
 
-export const SERVICES = [
-  {
-    text: "Female Salon at Home",
-    img: "/images/salon-at-home.webp",
-    subText: "We provide a range of beauty services at the comfort of your home. From waxing, facials, clean-ups and mani-pedi to body polishing and even hair spa, you name it we have it."
-  },
-  {
-    text: "Female Spa at Home",
-    subText: "Whether you want to de-stress yourself or get a pain-relieving body massage we have everything in the bucket for you. With this we also cater the needs of elderly, new moms, kids & period pain.",
-    img: "/images/spa-at-home.webp"
-  },
-  {
-    text: "Female HydraGlo & Laser Treatments",
-    subText: "As our skin matures, it needs more to maintain its health and glow. Our HydraGlo at Home are perfect for you if you want instant results with a healthy glow while our at home Laser Treatments are great for hair reduction, pigmentation correction, and skin rejuvenation.",
-    img: "/images/hydraLaser.webp"
-  }
-];
-
 export const NAV_ITEMS = [
+  {
+    text: "About Us",
+    path: "/about",
+  },
   {
     text: "Milestones",
     path: "/milestones",
   },
   {
     text: "Services",
-    path: "/services",
+    path: "/#services",
   },
   {
     text: "Media Coverage",
     path: "/media-coverage",
   },
   {
-    text: "Reviews",
-    path: "/reviews",
-  },
+    text: "Contact Us",
+    path: "/contact",
+  }
 ];
 
 export const CATEGORY = [
   {
-    text: "Cleaning Service",
-    slug: "cleaning-service",
-    img: "/images/make-up.webp"
+    "text": "Home Shine Xpert",
+    "slug": "home-shine-xpert",
+    "img": "/images/home-shine-xpert.webp",
+    "description": "Experience deep, professional cleaning that transforms your space into a spotless and refreshing environment. From sofas to kitchens, we ensure hygiene, precision, and care in every corner of your home."
   },
   {
-    text: "Beauty & Wellness(Men & Women)",
-    slug: "beauty-wellness",
-    img: "/images/male-grooming.webp"
+    "text": "Glow Studio",
+    "slug": "glow-studio",
+    "img": "/images/glow-studio.webp",
+    "description": "Indulge in salon-quality beauty and grooming services from the comfort of your home. Our trained professionals deliver personalized care, ensuring you look and feel your absolute best."
   },
   {
-    text: "Electrical, Plumber, Carpenter & Painter",
-    slug: "electrical-plumber-carpenter-painter",
-    img: "/images/mehndi.webp"
+    "text": "Repair Masters",
+    "slug": "repair-masters",
+    "img": "/images/repair-masters.webp",
+    "description": "From minor fixes to major repairs, our experts handle every task with skill and efficiency. We ensure reliable, timely, and hassle-free solutions for all your home maintenance needs."
   },
   {
-    text: "Instant Help Services",
-    slug: "instant-help-services",
-    img: "/images/male-spa.webp"
+    "text": "ApplianceCare+",
+    "slug": "appliance-care-plus",
+    "img": "/images/appliance-care-plus.webp",
+    "description": "Keep your essential appliances running smoothly with our expert repair services. We provide quick diagnostics and dependable solutions to extend the life of your devices."
   },
   {
-    text: "Home Appliances Repair",
-    slug: "home-appliances-repair",
-    img: "/images/hair-services.webp"
+    "text": "Leak & Pest Guard",
+    "slug": "leak-pest-guard",
+    "img": "/images/leak-pest-guard.webp",
+    "description": "Protect your home from damage with advanced pest control and waterproofing solutions. Our treatments ensure long-lasting safety, hygiene, and peace of mind for your family."
   },
   {
-    text: "Pest Control & Waterproofing",
-    slug: "pest-control-waterproofing",
-    img: "/images/pre-bridal.webp"
-  },
+    "text": "ComfortCart",
+    "slug": "comfortcart",
+    "img": "/images/comfort-cart.webp",
+    "description": "Enjoy professional car care services at your doorstep. From cleaning to maintenance, we ensure your vehicle stays in top condition with convenience and care."
+  }
 ]
+
+export const CUSTOMER_REVIEWS = [
+  {
+    "name": "Riya Mehta",
+    "rating": 5,
+    "review": "The cleaning service was excellent and my home felt completely refreshed. The team was professional and very detail-oriented.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Amit Sharma",
+    "rating": 4,
+    "review": "Very smooth experience from booking to service completion. The work was neat and handled with care.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Neha Kapoor",
+    "rating": 5,
+    "review": "Tried their Korean facial and it was honestly the best part of the experience. My skin felt instantly fresh and glowing.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Rahul Jain",
+    "rating": 4,
+    "review": "Good quality service and the results were clearly visible. The team worked efficiently and maintained cleanliness.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Sneha Patil",
+    "rating": 5,
+    "review": "Loved how convenient everything was. It’s great to have multiple services available in one place.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Karan Verma",
+    "rating": 4,
+    "review": "Professional approach and well-trained staff. The service quality met my expectations.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Pooja Desai",
+    "rating": 5,
+    "review": "The Korean facial was amazing, my skin felt so smooth and refreshed. Definitely one of the best services I’ve tried at home.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Vikram Singh",
+    "rating": 4,
+    "review": "The service was effective and done with proper care. Overall a reliable option for home services.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Anjali Shah",
+    "rating": 5,
+    "review": "The staff was polite and respectful. Also tried the Korean facial and absolutely loved the results.",
+    "date": "2022-01-01"
+  },
+  {
+    "name": "Rohit Kulkarni",
+    "rating": 4,
+    "review": "Good experience overall and very easy to book. Will definitely consider using Klean again.",
+    "date": "2022-01-01"
+  }
+]
+
+export const STORAGE_KEY = {
+  CART: "klean-cart",
+};
+
+export const FOOTER_LINKS = [
+  {
+    title: "Quick Links",
+    links: [
+      {
+        text: "Home",
+        href: "/"
+      },
+      {
+        text: "About Us",
+        href: "/about"
+      },
+      {
+        text: "Services",
+        href: "/#services"
+      },
+      {
+        text: "Reviews",
+        href: "/#reviews"
+      },
+      {
+        text: "Contact Us",
+        href: "/contact"
+      },
+      {
+        text: "Book Now",
+        href: "/book-now"
+      },
+      {
+        text: "FAQs",
+        href: "/faqs"
+      }
+    ]
+  },
+  {
+    title: "Services",
+    links: CATEGORY.map(it => ({ text: it.text, href: `/services/${it.slug}` }))
+  }
+]
+
+export const FOOTER_TURSTS = ["Verified Professionals", "Safe & Hygienic Services", "Transparent Pricing", "Customer Satisfaction Guaranteed"]

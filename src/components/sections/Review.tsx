@@ -1,37 +1,5 @@
+import { CUSTOMER_REVIEWS } from "@/constants";
 import Image from "next/image";
-
-const REVIEWS = [
-  {
-    name: "Happy Customer 1",
-    rating: 5,
-    review: "Klean services are absolutely amazing. I loved the experience at my own home!",
-    date: "2022-01-01",
-  },
-  {
-    name: "Happy Customer 2",
-    rating: 4,
-    review: "Klean services are absolutely amazing. I loved the experience at my own home!",
-    date: "2022-01-02",
-  },
-  {
-    name: "Happy Customer 3",
-    rating: 3,
-    review: "Klean services are absolutely amazing. I loved the experience at my own home!",
-    date: "2022-01-03",
-  },
-  {
-    name: "Happy Customer 4",
-    rating: 2,
-    review: "Klean services are absolutely amazing. I loved the experience at my own home!",
-    date: "2022-01-04",
-  },
-  {
-    name: "Happy Customer 5",
-    rating: 1,
-    review: "Klean services are absolutely amazing. I loved the experience at my own home!",
-    date: "2022-01-05",
-  },
-]
 
 export default function Review() {
   return (
@@ -41,7 +9,7 @@ export default function Review() {
           <h2 className="text-[#121212] text-3xl md:text-5xl font-inter font-bold leading-tight">Love from our customers</h2>
           <div className="flex items-center mt-6">
             <div className="relative w-16 h-16 md:w-20 md:h-20">
-              <Image src="/images/gold-star.svg" alt="Star" fill className="object-contain" />
+              <Image src="/images/gold-star.svg" alt="Star" fill sizes="(max-width: 768px) 64px, 80px" className="object-contain" />
             </div>
             <h2 className="text-5xl md:text-7xl font-extrabold ml-2">4.5</h2>
           </div>
@@ -54,8 +22,8 @@ export default function Review() {
       <div className="relative flex justify-around gap-5 overflow-hidden shrink-0">
         <div className="max-w-full mx-auto px-4 md:px-10 mx-auto w-full">
           <ul className="animate-scroll flex flex-nowrap w-max min-w-full hover:[animation-play-state:paused] overflow-hidden relative gap-5 justify-around shrink-0">
-            {REVIEWS.map((review) => (
-              <li key={`top-${review.date}`} className="">
+            {CUSTOMER_REVIEWS.map((review) => (
+              <li key={`top-${review.name}`} className="">
                 <div key={review.name} className="w-[85vw] md:w-[400px] shrink-0 p-6 shadow-xl bg-white rounded-2xl border border-gray-50">
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} />)}
@@ -67,8 +35,8 @@ export default function Review() {
             ))}
           </ul>
           <ul className="animate-scrollReverse mt-2 flex flex-nowrap w-max min-w-full hover:[animation-play-state:paused] overflow-hidden relative gap-5 justify-around shrink-0">
-            {REVIEWS.map((review) => (
-              <li key={`bottom-${review.date}`} className="">
+            {CUSTOMER_REVIEWS.map((review) => (
+              <li key={`bottom-${review.name}`} className="">
                 <div key={review.name} className="w-[85vw] md:w-[400px] shrink-0 p-6 shadow-xl bg-white rounded-2xl border border-gray-50">
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} />)}

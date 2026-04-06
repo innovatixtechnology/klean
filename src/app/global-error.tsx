@@ -1,13 +1,20 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface ErrorPageProps {
-  // error: Error & { digest?: string };
+  error: Error & { digest?: string };
   reset: () => void;
 }
 
-const GlobalError = ({ reset }: ErrorPageProps) => {
+const GlobalError = ({ error, reset }: ErrorPageProps) => {
+
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <section
       id="error"
