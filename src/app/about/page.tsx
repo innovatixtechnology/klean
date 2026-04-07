@@ -7,7 +7,7 @@ export default function About() {
       <section id="about" className="pt-20 pb-20 px-6 lg:px-16 max-w-7xl mx-auto overflow-hidden">
         <div className="animate-slide-up">
           <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-16 text-gray-900">
-            About <span className="text-primary italic">Klean.</span>
+            About <span className="text-primary italic">Klean Company.</span>
           </h1>
         </div>
 
@@ -17,7 +17,7 @@ export default function About() {
             <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
                <Image 
                   src="/images/founder.png" 
-                  alt="Sanchita Dhariwal - Founder of Klean" 
+                  alt="Sanchita Dhariwal - Founder of Klean Company" 
                   fill 
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
@@ -28,7 +28,7 @@ export default function About() {
                   <p className="text-3xl font-black tracking-tight mb-1">Sanchita Dhariwal</p>
                   <p className="text-white/90 text-sm font-bold uppercase tracking-widest flex items-center gap-3">
                     <span className="w-8 h-[2px] bg-primary"></span>
-                    Founder, Klean
+                    Founder, Klean Company
                   </p>
                </div>
             </div>
@@ -43,29 +43,29 @@ export default function About() {
                 <div className="relative">
                   <span className="absolute -left-10 -top-6 text-9xl text-primary/5 font-serif select-none">“</span>
                   <p className="text-2xl md:text-4xl font-extrabold leading-tight text-gray-900 tracking-tight italic">
-                     Klean is not just a service — it’s a promise.
+                     Klean Company is not just a service — it’s a promise.
                   </p>
                 </div>
                 
                 <div className="space-y-6 text-lg text-gray-600 leading-relaxed font-medium">
                   <p>
                      Like many of you, I’ve faced the struggle of finding reliable help for everyday home needs. 
-                     That’s exactly why I created Klean — a place where you can find trusted services without the stress.
+                     That’s exactly why I created Klean Company — a place where you can find trusted services without the stress.
                   </p>
 
                   <p>
-                     Klean is not just a company, it’s a commitment to making your life easier, cleaner, and more comfortable. 
+                     Klean Company is not just a company, it’s a commitment to making your life easier, cleaner, and more comfortable. 
                      Every service we offer is designed with care, quality, and your convenience in mind.
                   </p>
 
                   <p>
-                     Klean was built with a simple vision — to make everyday home services reliable, professional, and truly hassle-free. 
+                     Klean Company was built with a simple vision — to make everyday home services reliable, professional, and truly hassle-free. 
                      What started as an idea to simplify daily living has now grown into a platform that brings multiple essential services under one trusted name.
                   </p>
 
                   <p>
                      I believe your home deserves the best — whether it’s cleaning, repairs, grooming, or daily essentials. 
-                     With Klean, my goal is to ensure every service feels effortless, premium, and dependable.
+                     With Klean Company, my goal is to ensure every service feels effortless, premium, and dependable.
                   </p>
                 </div>
              </div>
@@ -89,7 +89,7 @@ export default function About() {
              <h2 className="text-4xl font-black tracking-tighter mb-8 text-gray-900">MISSION</h2>
              <div className="space-y-6">
                 <p className="text-xl text-gray-800 leading-relaxed font-bold">
-                   At Klean, our mission is to simplify everyday living by delivering reliable, high-quality home services that you can truly depend on.
+                   At Klean Company, our mission is to simplify everyday living by delivering reliable, high-quality home services that you can truly depend on.
                 </p>
                 <div className="space-y-4 text-gray-500 leading-relaxed">
                   <p>
@@ -118,7 +118,7 @@ export default function About() {
                   </p>
                   <div className="pt-8 mt-8 border-t border-gray-100">
                     <p className="text-primary font-black italic text-lg leading-snug">
-                      “Klean is not just a service provider — it’s a commitment to better, easier living.”
+                      “Klean Company is not just a service provider — it’s a commitment to better, easier living.”
                     </p>
                   </div>
                 </div>

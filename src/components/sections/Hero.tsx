@@ -3,6 +3,7 @@ import { siteConfig } from "@/constants";
 import NavMenu from "../Layout/NavMenu";
 import MobileNav from "../Layout/MobileNav";
 import { t } from "@/i18n"
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -11,7 +12,7 @@ export default function Hero() {
       <div className="z-0 inset-0 absolute">
         <Image
           src="/images/klean-hero.webp"
-          alt="Klean Premium Cleaning"
+          alt="Klean Company Premium Cleaning"
           fill
           sizes="100vw"
           priority
@@ -25,10 +26,9 @@ export default function Hero() {
       <header className="absolute top-0 left-0 right-0 z-50">
         <nav className="flex items-center justify-between px-6 py-6 lg:px-16 lg:py-8">
           <div className="flex items-center mix-blend-screen bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
-            <a href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95">
-              {siteConfig.shortName.toUpperCase()}
-              <span className="text-primary/70">.</span>
-            </a>
+            <Link href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95">
+              <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} />
+            </Link>
           </div>
 
           {/* Responsive Menu Navigation */}

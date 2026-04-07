@@ -25,7 +25,9 @@ function Footer() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mt-12 gap-10 md:gap-8 border-b-[1px] border-[#C6C6C6] pb-12">
           <div className="flex flex-col gap-4">
-            <p className="text-2xl font-black tracking-tight">{siteConfig.shortName.toUpperCase()}<span className="text-primary">.</span></p>
+            <Link href="/" className="text-2xl font-black tracking-tight">
+              <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={200} height={200} />
+            </Link>
             <p className="text-[#444] text-sm leading-relaxed max-w-sm">
               {siteConfig.description}
             </p>
@@ -97,7 +99,7 @@ function Footer() {
 
       <div className="w-[90%] mx-auto py-8">
         <p className="text-[#848484] text-xs font-medium uppercase tracking-widest text-center md:text-left">
-          Copyright 2026 Klean | All Rights Reserved. <span className="text-primary">|</span> <span className="text-primary">Design to simplify everyday living</span>
+          Copyright 2026 Klean Company | All Rights Reserved. <span className="text-primary">|</span> <span className="text-primary">Design to simplify everyday living</span>
         </p>
       </div>
     </footer>

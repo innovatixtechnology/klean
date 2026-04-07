@@ -6,6 +6,8 @@ import { siteConfig } from "@/constants";
 import { cn } from "@/lib/utils";
 import NavMenu from "./NavMenu";
 import MobileNav from "./MobileNav";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [show, setShow] = useState(false);
@@ -30,9 +32,9 @@ export default function Header() {
       )}>
       <div className="flex items-center justify-between px-6 lg:px-16 mx-auto max-w-[1920px]">
         <div className="flex justify-between items-center">
-          <a href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-            {siteConfig.shortName.toUpperCase()}<span className="text-primary">.</span>
-          </a>
+          <Link href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+            <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={150} height={150} />
+          </Link>
         </div>
 
         <NavMenu />

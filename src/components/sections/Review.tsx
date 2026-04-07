@@ -28,7 +28,7 @@ export default function Review() {
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} />)}
                   </div>
-                  <p className="text-[#646464] text-sm md:text-base font-inter">Klean services are absolutely amazing. I loved the experience at my own home!</p>
+                  <p className="text-[#646464] text-sm md:text-base font-inter">Klean Company services are absolutely amazing. I loved the experience at my own home!</p>
                   <p className="font-bold mt-4 text-[#121212]">{review.name}</p>
                 </div>
               </li>
@@ -41,7 +41,7 @@ export default function Review() {
                   <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} />)}
                   </div>
-                  <p className="text-[#646464] text-sm md:text-base font-inter">Klean services are absolutely amazing. I loved the experience at my own home!</p>
+                  <p className="text-[#646464] text-sm md:text-base font-inter">Klean Company services are absolutely amazing. I loved the experience at my own home!</p>
                   <p className="font-bold mt-4 text-[#121212]">{review.name}</p>
                 </div>
               </li>

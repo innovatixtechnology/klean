@@ -1,15 +1,16 @@
 export const siteConfig = {
-  name: "Klean",
+  name: "Klean Company",
   logo: {
-    src: "/logo.png",
-    alt: "Klean Logo",
+    src: "/logo-4.webp",
+    src2: "/logo-3.webp",
+    alt: "Klean Company Logo",
   },
-  shortName: "Klean",
-  description: "Klean is your trusted partner for premium home services - from cleaning and repairs to grooming and everyday essentials. We are commited to delivering quality, conveninance, and a seamless experiance to modern homes.",
+  shortName: "Klean Company",
+  description: "Klean Company is your trusted partner for premium home services - from cleaning and repairs to grooming and everyday essentials. We are commited to delivering quality, conveninance, and a seamless experiance to modern homes.",
   emoji: "🧙",
   backgroundColor: "#fff",
   themeColor: "#000",
-  siteUrl: "https://klean.com",
+  siteUrl: "https://kleancompany.com",
   category: "IT",
   links: {
     twitter: "https://twitter.com",
@@ -23,19 +24,19 @@ export const siteConfig = {
 
 export const NAV_ITEMS = [
   {
-    text: "About Us",
-    path: "/about",
+    text: "Home",
+    path: "/",
   },
   {
-    text: "Milestones",
-    path: "/milestones",
+    text: "About Us",
+    path: "/about",
   },
   {
     text: "Services",
     path: "/#services",
   },
   {
-    text: "Media Coverage",
+    text: "Media",
     path: "/media-coverage",
   },
   {
@@ -186,7 +187,7 @@ export const FOOTER_LINKS = [
   },
   {
     title: "Services",
-    links: CATEGORY.map(it => ({ text: it.text, href: `/services/${it.slug}` }))
+    links: CATEGORY.map(it => ({ text: it.text, href: `/service/${it.slug}` }))
   }
 ]
 

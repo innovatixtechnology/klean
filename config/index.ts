@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "Klean",
-  shortName: "klean",
+  name: "Klean Company",
+  shortName: "KC",
   description: "Beautifully designed template.",
   emoji: "🧙",
   backgroundColor: "#fff",
   themeColor: "#000",
   siteUrl: "https://Klean.com",
-  category: "Klean",
+  category: "Klean Company",
   mainNav: [
     {
       title: "Home",
@@ -25,13 +25,13 @@ export const siteConfig = {
 
 export const rootMetadata: Metadata = {
   title: {
-    default: "Klean",
-    template: "%s | Klean",
+    default: "Klean Company",
+    template: "%s | Klean Company",
   },
   description: "A comprehensive Next.js boilerplate with modern tooling",
   keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
   authors: [{ name: "Your Name" }],
-  creator: "Klean",
+  creator: "Klean Company",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -42,9 +42,9 @@ export const rootMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Klean",
+    title: "Klean Company",
     description: "A comprehensive Next.js boilerplate with modern tooling",
-    creator: "@Klean",
+    creator: "@Klean Company",
   },
   robots: {
     index: true,
