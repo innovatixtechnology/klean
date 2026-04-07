@@ -41,14 +41,6 @@ export default function Hero() {
       {/* Core Content: Scalable and Responsive typography */}
       <div className="relative z-10 w-full max-w-7xl px-6 lg:px-16 flex flex-col gap-8 md:gap-12 md:mt-10">
         <div className="flex flex-col gap-6 text-center items-center lg:items-start lg:text-left">
-          {/* Micro-badge for premium feel */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            {t("Hero.heading-top")}
-          </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.1] tracking-tighter flex flex-col gap-2 lg:gap-4">
             <span>{t("Hero.heading-main")}</span>
