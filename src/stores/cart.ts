@@ -14,6 +14,9 @@ export interface CartProduct {
   price: number;
   images?: CartImage[];
   description?: string;
+  slug?: string;
+  subCategorySlug?: string;
+  categorySlug?: string;
 }
 
 interface Cart {

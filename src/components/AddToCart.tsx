@@ -13,6 +13,9 @@ interface Props {
         price: number | string;
         image?: string;
         description?: string;
+        slug?: string;
+        subCategorySlug?: string;
+        categorySlug?: string;
     };
     className?: string;
 }
@@ -33,7 +36,10 @@ export function AddToCart({ fullWidth = false, product, className }: Readonly<Pr
             price: typeof product.price === 'string' ? parseFloat(product.price.replace(/,/g, "")) : product.price,
             qty: 1,
             images: product.image ? [{ src: product.image, alt: product.name }] : [],
-            description: product.description
+            description: product.description,
+            slug: product.slug,
+            subCategorySlug: product.subCategorySlug,
+            categorySlug: product.categorySlug,
         };
         addProduct(cartProduct);
     };
@@ -57,7 +63,7 @@ export function AddToCart({ fullWidth = false, product, className }: Readonly<Pr
                 onClick={handleInitialAdd}
                 className={cn(
                     "rounded-full text-white font-extrabold transition-all duration-300 transform active:scale-95 shadow-lg shadow-primary/10",
-                    fullWidth ? "w-full py-6 text-lg" : "px-6 py-2 h-auto",
+                    fullWidth ? "w-full h-12 text-lg" : "h-10 px-6",
                     className
                 )}
             >
@@ -69,8 +75,8 @@ export function AddToCart({ fullWidth = false, product, className }: Readonly<Pr
 
     return (
         <div className={cn(
-            "flex items-center bg-primary/5 rounded-full p-1 border border-primary/20 bg-white shadow-sm transition-all",
-            fullWidth ? "w-full justify-between py-2 px-4 h-14" : "gap-1",
+            "flex items-center bg-white rounded-full border border-primary/20 shadow-sm transition-all",
+            fullWidth ? "w-full h-12 justify-between px-1.5" : "h-10 px-1 gap-1",
             className
         )}>
             <button
@@ -78,7 +84,7 @@ export function AddToCart({ fullWidth = false, product, className }: Readonly<Pr
                 onClick={handleDecrement}
                 className={cn(
                     "flex items-center justify-center rounded-full transition-all text-primary hover:bg-primary hover:text-white active:scale-90",
-                    fullWidth ? "w-10 h-10 bg-gray-50" : "w-8 h-8"
+                    fullWidth ? "w-9 h-9" : "w-8 h-8"
                 )}
                 aria-label="Decrease quantity"
             >
@@ -97,7 +103,7 @@ export function AddToCart({ fullWidth = false, product, className }: Readonly<Pr
                 onClick={handleIncrement}
                 className={cn(
                     "flex items-center justify-center rounded-full transition-all text-primary hover:bg-primary hover:text-white active:scale-90",
-                    fullWidth ? "w-10 h-10 bg-gray-50" : "w-8 h-8"
+                    fullWidth ? "w-9 h-9" : "w-8 h-8"
                 )}
                 aria-label="Increase quantity"
             >

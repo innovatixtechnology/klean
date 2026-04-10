@@ -1,7 +1,9 @@
+import { createContact } from "@/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function Newsletter() {
+
   return (
     <section id="newsletter" className="mt-20 px-4 md:px-10 lg:max-w-[80%] mx-auto mb-10">
       <div className="relative overflow-hidden bg-gray-50/50 border border-gray-100 rounded-[3rem] p-10 md:p-20 shadow-[0_20px_50px_rgba(0,0,0,0.04)] text-center max-w-5xl mx-auto flex flex-col items-center justify-center fade-in-up">
@@ -11,7 +13,7 @@ export default function Newsletter() {
 
         <div className="relative z-10 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-black uppercase tracking-[0.2em] mb-6">
-             Join our Community
+            Join our Community
           </div>
 
           <h2 className="mb-6 text-4xl font-black text-gray-900 md:text-5xl tracking-tight">
@@ -22,8 +24,9 @@ export default function Newsletter() {
             Subscribe to our newsletter to get exclusive offers, expert home care tips, and be the first to know about new services.
           </p>
 
-          <form className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-xl mx-auto" action="#">
+          <form action={createContact} className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-xl mx-auto">
             <Input
+              name="email"
               type="email"
               placeholder="Enter your email address"
               required

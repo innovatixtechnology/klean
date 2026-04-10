@@ -5,7 +5,7 @@ import Newsletter from "@/components/sections/Newsletter";
 import Review from "@/components/sections/Review";
 import Service from "@/components/sections/Service";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Hero />

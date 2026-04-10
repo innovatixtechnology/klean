@@ -15,6 +15,20 @@
       "when": 1775470401797,
       "tag": "0001_funny_doorman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775799720053,
+      "tag": "0002_productive_ricochet",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1775799927056,
+      "tag": "0003_magenta_nighthawk",
+      "breakpoints": true
     }
   ]
 }

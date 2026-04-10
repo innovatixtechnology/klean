@@ -1,5 +1,4 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { createAuthMiddleware } from "better-auth/api";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
 import { db } from "@/db";
@@ -62,6 +61,10 @@ export const auth = betterAuth({
         type: "string",
         required: false,
       },
+      role: {
+        type: "string",
+        required: false,
+      },
     },
     fields: {
       name: "firstName",
@@ -69,17 +72,40 @@ export const auth = betterAuth({
     },
   },
   hooks: {
-    after: createAuthMiddleware(async (ctx) => {
-      if (ctx.path.startsWith("/sign-up")) {
-        // Add welcome email or other post-signup logic here
-        console.log("New user signed up:", ctx.path);
-      }
-    }),
+    // before: createAuthMiddleware(async (ctx) => {
+    //   // 1. Check IP address
+    //   const ip =
+    //     ctx.request.headers.get("x-forwarded-for")?.split(",")[0] ||
+    //     ctx.request.headers.get("x-real-ip") ||
+    //     "unknown";
+
+    //   if (ip !== "unknown" && (await checkIsBlocked("IP", ip))) {
+    //     throw new Error("Access denied: Your IP address has been blacklisted.");
+    //   }
+
+    //   // 2. Check Email/Phone for sign-in and sign-up
+    //   if (ctx.path.startsWith("/sign-in") || ctx.path.startsWith("/sign-up")) {
+    //     const body = ctx.body as any;
+    //     const email = body?.email;
+    //     const phone = body?.phoneNumber;
+
+    //     if (email && (await checkIsBlocked("EMAIL", email))) {
+    //       throw new Error("Access denied: This email address is blacklisted.");
+    //     }
+
+    //     if (phone && (await checkIsBlocked("PHONE", phone))) {
+    //       throw new Error("Access denied: This phone number is blacklisted.");
+    //     }
+    //   }
+    // }),
   },
   databaseHooks: {},
   advanced: {
     database: {
       generateId: false,
     },
+  },
+  logger: {
+    level: "debug",
   },
 });

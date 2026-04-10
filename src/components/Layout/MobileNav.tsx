@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { NAV_ITEMS, siteConfig } from "@/constants";
 import type { Route } from "next";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 interface IProps {
   textColor?: string;
+  session?: any;
+  onSignOut: () => void;
 }
 
-export default function MobileNav({ textColor = '' }: IProps) {
+export default function MobileNav({ textColor = '', session, onSignOut }: Readonly<IProps>) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export default function MobileNav({ textColor = '' }: IProps) {
       >
         <div className="flex h-full flex-col items-center justify-center space-y-8 px-10 pt-20">
           <Link href="/" className="absolute top-8 left-8 text-3xl font-black text-white mix-blend-difference" onClick={() => setIsOpen(false)}>
-            {siteConfig.shortName.toUpperCase()}<span className="text-primary">.</span>
+            <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} />
           </Link>
 
           <nav className="flex w-full flex-col space-y-6 text-center">
@@ -49,6 +53,7 @@ export default function MobileNav({ textColor = '' }: IProps) {
               <Link
                 key={item.text}
                 href={item.path as Route}
+                onClick={() => setIsOpen(false)}
                 className="text-3xl font-black text-white hover:text-primary transition-colors tracking-tighter"
               >
                 {item.text}
@@ -57,13 +62,19 @@ export default function MobileNav({ textColor = '' }: IProps) {
           </nav>
 
           <div className="pt-10">
-            <Link
+            {session?.user?.email ? <Link
               href={"/sign-in" as Route}
+              className="rounded-full bg-primary px-12 py-5 text-xl font-bold text-white shadow-2xl shadow-primary/30 transition-transform active:scale-95"
+              onClick={() => onSignOut()}
+            >
+              Sign Out
+            </Link> : (<Button
               className="rounded-full bg-primary px-12 py-5 text-xl font-bold text-white shadow-2xl shadow-primary/30 transition-transform active:scale-95"
               onClick={() => setIsOpen(false)}
             >
               Login
-            </Link>
+            </Button>)
+            }
           </div>
 
           <div className="absolute bottom-12 flex space-x-6">

@@ -156,6 +156,7 @@ export const CUSTOMER_REVIEWS = [
 
 export const STORAGE_KEY = {
   CART: "klean-cart",
+  ADDRESS: "klean-address",
 };
 
 export const FOOTER_LINKS = [

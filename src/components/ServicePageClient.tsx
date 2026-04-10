@@ -1,41 +1,35 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+import type { Route } from "next";
 import { useState } from "react";
 import { useCartStore } from "@/stores/cart";
 import { CATEGORY } from "@/constants";
-import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
-import type { Route } from "next";
 import { AddToCart } from "@/components/AddToCart";
 import { ServiceDetailModal } from "@/components/ServiceDetailModal";
-
-interface MockService {
-  id: number;
-  title: string;
-  price: string;
-  duration: string;
-  rating: string;
-  reviews: string;
-  image: string;
-  images?: string[];
-  description: string;
-  benefits?: string[];
-}
+import { useAddressStore } from "@/stores/address";
+import { AddressSelectionDialog } from "@/components/AddressSelectionDialog";
+import { MapPinIcon, ArrowRightIcon } from "@/components/icons";
+import type { Service, Category } from "@/db/schema";
 
 interface ServicePageClientProps {
-  currentCategory: typeof CATEGORY[0];
-  mockServices: MockService[];
+  currentCategory: Category;
+  services: Service[];
 }
 
-export default function ServicePageClient({ currentCategory, mockServices }: ServicePageClientProps) {
+export default function ServicePageClient({ currentCategory, services }: ServicePageClientProps) {
   const { updateQuantity, cart } = useCartStore();
-  const [selectedService, setSelectedService] = useState<MockService | null>(null);
+  const { addresses, selectedAddressId } = useAddressStore();
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+
+  const selectedAddress = addresses.find(a => a.id === selectedAddressId);
 
   return (
     <div className="bg-gray-50/50 min-h-screen font-inter">
       <div className="mx-auto max-w-[1920px] px-6 lg:px-16 flex gap-10 h-[calc(100vh-70px)] sticky top-[70px] overflow-hidden">
-        
+
         {/* LEFT: Fixed Categories Sidebar */}
         <aside className="hidden lg:flex flex-col w-72 h-full overflow-y-auto pt-10 border-r border-gray-200 pr-8 scrollbar-hide">
           <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Categories</h2>
@@ -58,7 +52,7 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
         </aside>
 
         {/* MID: Scrollable Content Area */}
-        <main className="flex-1 overflow-y-auto scrollbar-hide pt-10 pb-32 h-full">
+        <div className="flex-1 overflow-y-auto scrollbar-hide pt-10 pb-32 h-full">
           <div className="lg:hidden flex gap-3 overflow-x-auto scrollbar-hide pb-4 mb-4">
             {CATEGORY.map((cat) => (
               <Link
@@ -82,15 +76,11 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
           </div>
 
           <div className="grid gap-6">
-            {mockServices.map((service, index) => (
-              <div 
-                key={service.id} 
+            {services.map((service, index) => (
+              <div
+                key={service.id}
                 className={cn(
                   "group flex flex-col md:flex-row gap-6 p-6 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm transition-all duration-700 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-300/40 fade-in-up",
-                  index === 0 ? "delay-0" : 
-                  index === 1 ? "delay-100" :
-                  index === 2 ? "delay-200" :
-                  index === 3 ? "delay-300" : "delay-400"
                 )}
               >
                 {/* Clickable image area opens modal */}
@@ -121,7 +111,7 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
                     <div className="flex items-center gap-4 text-sm text-gray-400 font-medium">
                       <span className="flex items-center gap-1.5 font-bold text-gray-900">₹ {service.price}</span>
                       <span className="w-1.5 h-1.5 rounded-full bg-gray-200" />
-                      <span className="flex items-center gap-1.5 text-gray-400 font-medium"><svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><title>Duration</title><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg> {service.duration}</span>
+                      <span className="flex items-center gap-1.5 text-gray-400 font-medium"><svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><title>Duration</title><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg> {service.duration}</span>
                     </div>
                   </div>
                   <div className="mt-6 flex gap-3">
@@ -149,7 +139,7 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
               </div>
             ))}
           </div>
-        </main>
+        </div>
 
         {/* RIGHT: Fixed Summary Sidebar */}
         <aside className="hidden xl:flex flex-col w-96 h-full pt-10 pl-8 border-l border-gray-200">
@@ -157,7 +147,7 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 shrink-0">
               Cart Summary <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">{cart.totalProductsCount} items</span>
             </h2>
-            
+
             {cart.products.length > 0 ? (
               <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide flex flex-col gap-4 mb-6">
                 {cart.products.map((item) => (
@@ -184,9 +174,48 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
                 <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-inner">
                   <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><title>Empty Cart</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                 </div>
-                <p className="text-gray-400 text-sm font-medium">Your cart is feeling light.<br/>Add services to get started!</p>
+                <p className="text-gray-400 text-sm font-medium">Your cart is feeling light.<br />Add services to get started!</p>
               </div>
             )}
+
+            {/* Address Selection */}
+            <div className="mt-6 mb-8 p-6 bg-gray-50/50 rounded-[2rem] border border-gray-100 group transition-all hover:bg-white hover:shadow-xl hover:shadow-gray-200/40">
+              <div className="flex items-center justify-between mb-3 leading-none">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.15em]">Location</span>
+                <AddressSelectionDialog
+                  trigger={
+                    <button type='button' className="text-primary text-[10px] font-black uppercase tracking-wider hover:underline flex items-center gap-1">
+                      {selectedAddress ? "Change" : "Add"} <ArrowRightIcon size={12} />
+                    </button>
+                  }
+                />
+              </div>
+
+              <AddressSelectionDialog
+                trigger={
+                  <button type='button' className="flex items-start gap-4 text-left w-full group/btn">
+                    <div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center shrink-0 text-primary group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300 transform group-hover/btn:scale-105">
+                      <MapPinIcon size={20} />
+                    </div>
+                    <div className="flex-1 min-w-0 py-0.5">
+                      {selectedAddress ? (
+                        <>
+                          <p className="font-black text-gray-900 truncate leading-tight mb-1">{selectedAddress.category || "Address"}</p>
+                          <p className="text-[11px] text-gray-500 font-bold truncate tracking-tight opacity-70 italic">
+                            {selectedAddress.addressLine1}{selectedAddress.addressLine2 ? `, ${selectedAddress.addressLine2}` : ""}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-black text-gray-900 leading-tight mb-1">Select Address</p>
+                          <p className="text-[11px] text-gray-500 font-bold tracking-tight opacity-70 italic">To see accurate availability</p>
+                        </>
+                      )}
+                    </div>
+                  </button>
+                }
+              />
+            </div>
 
             <div className="mt-auto pt-6 border-t border-gray-100 bg-white">
               {cart.products.length > 0 && (
@@ -195,17 +224,21 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
                   <span className="text-2xl font-black text-gray-900">₹ {cart.totalProductsPrice}</span>
                 </div>
               )}
-              <button 
-                type="button" 
-                disabled={cart.products.length === 0}
+              <button
+                type="button"
+                disabled={cart.products.length === 0 || !selectedAddressId}
                 className={cn(
-                  "w-full py-4 rounded-full font-bold transition-all transform active:scale-95 shadow-lg",
-                  cart.products.length > 0 
-                    ? "bg-primary text-white hover:bg-primary/90 shadow-primary/20" 
+                  "w-full py-5 rounded-full font-black text-lg transition-all transform active:scale-95 shadow-xl",
+                  (cart.products.length > 0 && selectedAddressId)
+                    ? "bg-primary text-white hover:bg-primary/90 shadow-primary/25"
                     : "bg-gray-100 text-gray-400 cursor-not-allowed"
                 )}
               >
-                {cart.products.length > 0 ? "Proceed to Checkout" : "Select address to proceed"}
+                {cart.products.length === 0
+                  ? "Select Services"
+                  : !selectedAddressId
+                    ? "Select Address"
+                    : "Proceed to Checkout"}
               </button>
             </div>
           </div>
@@ -217,15 +250,22 @@ export default function ServicePageClient({ currentCategory, mockServices }: Ser
         <div className="xl:hidden fixed bottom-6 left-4 right-4 p-4 bg-white border border-gray-100 rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] z-40">
           <div className="flex items-center justify-between gap-4">
             <div className="flex flex-col pl-2">
-               <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">{cart.totalProductsCount} items</span>
-               <span className="text-xl font-black text-gray-900 leading-tight">₹ {cart.totalProductsPrice}</span>
+              <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">{cart.totalProductsCount} items</span>
+              <span className="text-xl font-black text-gray-900 leading-tight">₹ {cart.totalProductsPrice}</span>
             </div>
-            <button 
-              type="button" 
-              className="bg-primary text-white px-8 py-3.5 rounded-2xl font-bold shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 max-w-[200px] text-center"
-            >
-              Checkout
-            </button>
+            <AddressSelectionDialog
+              trigger={
+                <button
+                  type="button"
+                  className={cn(
+                    "px-8 py-3.5 rounded-2xl font-black shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 max-w-[200px] text-center",
+                    selectedAddressId ? "bg-primary text-white" : "bg-primary/10 text-primary"
+                  )}
+                >
+                  {selectedAddressId ? "Checkout" : "Add Address"}
+                </button>
+              }
+            />
           </div>
         </div>
       )}

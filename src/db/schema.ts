@@ -1,7 +1,6 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
-  foreignKey,
   index,
   integer,
   jsonb,
@@ -79,9 +78,23 @@ export const accountRelations = relations(accounts, ({ one }) => ({
   }),
 }));
 
+export const blockTypeEnum = pgEnum("block_type", ["EMAIL", "IP", "PHONE", "USER_ID", "DELETE_REQUEST"]);
+
+export const blocks = createTable("blocks", {
+  id: serial("id").primaryKey(),
+  type: blockTypeEnum("type").notNull(),
+  value: text("value").notNull(),
+  reason: text("reason"),
+  isActive: boolean("is_active").default(true),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+  ...timestamps,
+}, (table) => [
+  index("blocks_type_value_idx").on(table.type, table.value),
+]);
+
 // --- USERS ---
 
-export const roleEnum = pgEnum("role", ["USER", "PROFESSIONAL", "ADMIN"]);
+export const roleEnum = pgEnum("role", ["USER", "PROFESSIONAL", "ADMIN", "EMPLOYEE"]);
 
 export const users = createTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -118,6 +131,7 @@ export const addresses = createTable("addresses", {
   state: varchar("state", { length: 100 }),
   pincode: varchar("pincode", { length: 10 }),
   isDefault: boolean("is_default").default(false),
+  country: varchar("country", { length: 100 }),
   category: varchar("category", { length: 100 }), // HOME, OFFICE, etc.
   ...timestamps,
 }, (table) => [
@@ -127,23 +141,17 @@ export const addresses = createTable("addresses", {
 
 export const professionalServices = createTable("professional_services", {
   id: uuid("id").primaryKey().defaultRandom(),
-  professionalId: uuid("professional_id").notNull(),
-  serviceId: uuid("service_id").notNull(),
+  professionalId: uuid("professional_id")
+    .references(() => professionals.id, { onDelete: "cascade" })
+    .notNull(),
+  serviceId: uuid("service_id")
+    .references(() => services.id, { onDelete: "cascade" })
+    .notNull(),
   price: numeric("price", { precision: 10, scale: 2 }).notNull(),
 }, (table) => [
   index("prof_serv_profId_idx").on(table.professionalId),
   index("prof_serv_servId_idx").on(table.serviceId),
   unique("prof_serv_unique").on(table.professionalId, table.serviceId),
-  foreignKey({
-    columns: [table.professionalId],
-    foreignColumns: [professionals.id],
-    name: "prof_serv_prof_id_fk",
-  }).onDelete("cascade"),
-  foreignKey({
-    columns: [table.serviceId],
-    foreignColumns: [services.id],
-    name: "prof_serv_serv_id_fk",
-  }).onDelete("cascade"),
 ]);
 
 export const bookingStatusEnum = pgEnum("booking_status", [
@@ -152,6 +160,7 @@ export const bookingStatusEnum = pgEnum("booking_status", [
   "CONFIRMED",
   "COMPLETED",
   "CANCELLED",
+  "IN_PROGRESS",
 ]);
 
 export const bookings = createTable("bookings", {
@@ -161,6 +170,7 @@ export const bookings = createTable("bookings", {
   addressId: uuid("address_id").references(() => addresses.id).notNull(),
   status: bookingStatusEnum("status").default("PENDING"),
   assignedAt: timestamp("assigned_at", { withTimezone: true }),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
   ...timestamps,
 }, (table) => [
   index("bookings_userId_idx").on(table.userId),
@@ -192,6 +202,8 @@ export const reviews = createTable("reviews", {
 export const categories = createTable("categories", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 100 }).notNull(),
+  slug: text("slug").notNull().unique(),
+  description: varchar("description", { length: 500 }),
   isActive: boolean("is_active").default(true),
   image: text("image"),
   ...timestamps,
@@ -200,6 +212,7 @@ export const categories = createTable("categories", {
 export const subCategories = createTable("sub_categories", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 100 }).notNull(),
+  slug: text("slug").notNull().unique(),
   description: varchar("description", { length: 500 }),
   image: text("image"),
   isActive: boolean("is_active").default(true),
@@ -214,8 +227,10 @@ export const subCategories = createTable("sub_categories", {
 export const services = createTable("services", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 100 }).notNull(),
-  image: text("image").array(), // Simplified to array of URL strings
+  slug: text("slug").notNull().unique(),
+  images: text("image").array(),
   price: numeric("price", { precision: 10, scale: 2 }).notNull(),
+  discountedPrice: numeric("discounted_price", { precision: 10, scale: 2 }),
   description: varchar("description", { length: 500 }),
   isActive: boolean("is_active").default(true),
   additionalInfo: jsonb("additional_info"), // { duration: "2 hours", seats: 2 }
@@ -403,3 +418,5 @@ export type ActivityLog = typeof activityLogs.$inferSelect;
 export type NewActivityLog = typeof activityLogs.$inferInsert;
 export type Contact = typeof contacts.$inferSelect;
 export type NewContact = typeof contacts.$inferInsert;
+export type Block = typeof blocks.$inferSelect;
+export type NewBlock = typeof blocks.$inferInsert;

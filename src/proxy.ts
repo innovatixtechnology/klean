@@ -11,9 +11,13 @@ export async function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
+    if (request.nextUrl.pathname === "/sign-in" || request.nextUrl.pathname === "/sign-up") {
+        return NextResponse.redirect(new URL("/", request.url));
+    }
+
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/orders", "/profile"],
+    matcher: [],
 };

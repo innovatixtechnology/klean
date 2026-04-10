@@ -1,11 +1,12 @@
-import { CATEGORY } from "@/constants";
 import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { getAllCategories } from "@/actions";
 
-export default function Service() {
+export default async function Service() {
+  const data = await getAllCategories();
   return (
     <section id="services" className="mt-20 px-4 md:px-10 lg:max-w-[95%] xl:max-w-[1440px] mx-auto py-16">
       <div className="flex flex-col items-center mb-16 text-center">
@@ -17,14 +18,14 @@ export default function Service() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-6 gap-y-12">
-        {CATEGORY.map((service) => (
-          <div key={service.text} className="group relative flex flex-col items-center w-full">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+        {data.map((service) => (
+          <div key={service.slug} className="group relative flex flex-col items-center w-full">
             <Link href={`/service/${service.slug}` as Route} className="w-full h-full flex flex-col">
               <div className="relative w-full aspect-[280/320] overflow-hidden rounded-[2rem] bg-gray-50 shadow-sm border border-neutral-100 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-primary/20">
                 <Image
-                  src={service.img}
-                  alt={service.text}
+                  src={`/images/${service.slug}.webp`}
+                  alt={service.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -46,7 +47,7 @@ export default function Service() {
               
               <div className="mt-8 flex flex-col items-center text-center px-1 flex-grow">
                 <h3 className="text-lg xl:text-xl text-[#121212] font-inter font-bold tracking-tight mb-2 transition-colors duration-300 group-hover:text-primary">
-                  {service.text}
+                  {service.name}
                 </h3>
                 <p className="text-[#646464] font-inter text-xs lg:text-sm leading-relaxed line-clamp-3">
                   {service?.description}

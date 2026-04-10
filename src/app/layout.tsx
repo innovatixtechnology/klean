@@ -7,8 +7,9 @@ import { rootMetadata, siteConfig } from "@/config";
 import { geistMono, geistSans } from "@/lib/fonts";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
-import Analytics from "@/components/Analytics/Analytics";
 import { PostHogProvider } from "@/components/Analytics/PostHogProvider";
+import { Toaster } from "sonner";
+import { Suspense } from "react";
 
 export const metadata: Metadata = { ...rootMetadata };
 
@@ -35,21 +36,23 @@ interface Props {
 
 }
 
-export default function RootLayout({ children, modal }: Readonly<Props>) {
+export default async function RootLayout({ children, modal }: Readonly<Props>) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh antialiased`}>
         <NextTopLoader color="var(--primary)" showSpinner={false} />
-        <PostHogProvider>
-          <Header />
-          <main className="flex-grow relative z-10">{children}</main>
-          {modal}
-          <Footer />
-          <ScrollToTop />
-        </PostHogProvider>
-        <Analytics />
+        <Suspense fallback={null}>
+          <PostHogProvider>
+            <Header />
+            <main className="grow relative z-10">{children}</main>
+            {modal}
+            <Footer />
+            <ScrollToTop />
+          </PostHogProvider>
+        </Suspense>
+        <Toaster position="top-right" />
       </body>
     </html>
   );

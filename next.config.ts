@@ -39,6 +39,15 @@ const baseConfig: NextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: false,
+      },
+    ];
+  },
   transpilePackages: ["geist"],
 };
 export default baseConfig;
