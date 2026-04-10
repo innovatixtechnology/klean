@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/ContactForm";
 import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/icons";
+import { siteConfig } from "@/constants";
 import Image from "next/image";
 
 export default function ContactPage() {
@@ -29,7 +30,9 @@ export default function ContactPage() {
                 <PhoneIcon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black mb-2 italic">Call Us</h3>
-              <p className="text-gray-500 font-bold tracking-tight">+91 xxxxx xxxxx</p>
+              <a href={siteConfig.contact.phoneHref} className="text-gray-500 font-bold tracking-tight hover:text-primary transition-colors">
+                {siteConfig.contact.phone}
+              </a>
               <p className="text-gray-400 text-sm mt-1">Mon - Sun, 9am - 9pm</p>
             </div>
 
@@ -38,7 +41,9 @@ export default function ContactPage() {
                 <MailIcon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-black mb-2 italic">Email Us</h3>
-              <p className="text-gray-500 font-bold tracking-tight">support@klean.com</p>
+              <a href={siteConfig.contact.emailHref} className="text-gray-500 font-bold tracking-tight hover:text-primary transition-colors break-all">
+                {siteConfig.contact.email}
+              </a>
               <p className="text-gray-400 text-sm mt-1">We'll respond within 24h</p>
             </div>
 
@@ -57,6 +62,8 @@ export default function ContactPage() {
                 <a
                   key={social}
                   href="/"
+                  aria-label={social}
+                  title={social}
                   className="w-16 h-16 bg-white border border-gray-100 shadow-sm rounded-3xl flex items-center justify-center hover:shadow-xl hover:border-primary/20 transition-all hover:-translate-y-2"
                 >
                   <Image src={`/images/${social}.svg`} alt={social} width={24} height={24} />

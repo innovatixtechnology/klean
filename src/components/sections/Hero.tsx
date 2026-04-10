@@ -10,13 +10,23 @@ export default function Hero() {
     <section id="hero" className="relative w-full h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
       {/* Background Layer with Premium Effects */}
       <div className="z-0 inset-0 absolute">
+        {/* Mobile Hero Image */}
         <Image
-          src="/images/klean-hero.webp"
+          src="/images/mobileherbanner.png"
           alt="Klean Company Premium Cleaning"
           fill
           sizes="100vw"
           priority
-          className="object-cover object-center"
+          className="object-cover object-center md:hidden"
+        />
+        {/* Desktop Hero Image */}
+        <Image
+          src="/images/hero-banner.png"
+          alt="Klean Company Premium Cleaning"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover object-center hidden md:block"
         />
         {/* Subtle Overlay to ensure text readability while keeping image visible */}
         <div className="absolute inset-0 bg-black/40" />

@@ -7,6 +7,13 @@ export const siteConfig = {
   },
   shortName: "Klean Company",
   description: "Klean Company is your trusted partner for premium home services - from cleaning and repairs to grooming and everyday essentials. We are commited to delivering quality, conveninance, and a seamless experiance to modern homes.",
+  contact: {
+    phone: "+91 9036529150",
+    phoneHref: "tel:+919036529150",
+    whatsappHref: "https://wa.me/919036529150?text=Hi%20Klean%2C%20I%20want%20to%20book%20a%20service",
+    email: "kleancompany19@gmail.com",
+    emailHref: "mailto:kleancompany19@gmail.com",
+  },
   emoji: "🧙",
   backgroundColor: "#fff",
   themeColor: "#000",
@@ -49,37 +56,37 @@ export const CATEGORY = [
   {
     "text": "Home Shine Xpert",
     "slug": "home-shine-xpert",
-    "img": "/images/home-shine-xpert.webp",
+    "img": "/images/homeshinexpert.png",
     "description": "Experience deep, professional cleaning that transforms your space into a spotless and refreshing environment. From sofas to kitchens, we ensure hygiene, precision, and care in every corner of your home."
   },
   {
     "text": "Glow Studio",
     "slug": "glow-studio",
-    "img": "/images/glow-studio.webp",
+    "img": "/images/glowstudio.png",
     "description": "Indulge in salon-quality beauty and grooming services from the comfort of your home. Our trained professionals deliver personalized care, ensuring you look and feel your absolute best."
   },
   {
     "text": "Repair Masters",
     "slug": "repair-masters",
-    "img": "/images/repair-masters.webp",
+    "img": "/images/repairmasters.png",
     "description": "From minor fixes to major repairs, our experts handle every task with skill and efficiency. We ensure reliable, timely, and hassle-free solutions for all your home maintenance needs."
   },
   {
     "text": "ApplianceCare+",
     "slug": "appliance-care-plus",
-    "img": "/images/appliance-care-plus.webp",
+    "img": "/images/appliancecare+.png",
     "description": "Keep your essential appliances running smoothly with our expert repair services. We provide quick diagnostics and dependable solutions to extend the life of your devices."
   },
   {
     "text": "Leak & Pest Guard",
     "slug": "leak-pest-guard",
-    "img": "/images/leak-pest-guard.webp",
+    "img": "/images/leak-pestguard.png",
     "description": "Protect your home from damage with advanced pest control and waterproofing solutions. Our treatments ensure long-lasting safety, hygiene, and peace of mind for your family."
   },
   {
     "text": "ComfortCart",
     "slug": "comfortcart",
-    "img": "/images/comfort-cart.webp",
+    "img": "/images/comfortcart.png",
     "description": "Enjoy professional car care services at your doorstep. From cleaning to maintenance, we ensure your vehicle stays in top condition with convenience and care."
   }
 ]
