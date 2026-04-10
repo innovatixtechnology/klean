@@ -81,15 +81,18 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
       headers: await headers()
     });
     if (!session?.user?.id) {
-      return { success: false, error: "Authentication required" };
+      const data = Object.fromEntries(formData.entries());
+      return { success: false, error: "Authentication required", ...data };
     }
 
     const data = Object.fromEntries(formData.entries());
 
     const parsedData = addressSchema.safeParse(data);
 
+    console.log(parsedData, data)
+
     if (!parsedData.success) {
-      return { success: false, error: parsedData.error.message };
+      return { success: false, error: parsedData.error.message, ...data };
     }
 
     const address: NewAddress = {
@@ -107,13 +110,14 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     const result = await db.insert(addresses).values(address).returning();
 
     if (!result?.[0]?.id) {
-      return { success: false, error: "Failed to save address" };
+      return { success: false, error: "Failed to save address", ...data };
     }
 
     return { success: true, address: result[0] };
   } catch (_error) {
     console.log(_error);
-    return { success: false, error: "Failed to update address" };
+    const data = Object.fromEntries(formData.entries());
+    return { success: false, error: "Failed to update address", ...data };
   }
 }
 

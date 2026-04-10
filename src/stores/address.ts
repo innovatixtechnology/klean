@@ -31,7 +31,7 @@ export const useAddressStore = create<AddressState>()(
       setAddresses: (addresses) => {
         set((state) => ({
           addresses: [...state.addresses, ...addresses],
-          selectedAddressId: state.selectedAddressId ?? addresses[0].id,
+          selectedAddressId: state.selectedAddressId ?? addresses?.[0]?.id,
         }));
       },
       removeAddress: (id) => {
@@ -39,7 +39,7 @@ export const useAddressStore = create<AddressState>()(
           const newAddresses = state.addresses.filter((a) => a.id !== id);
           let newSelectedId = state.selectedAddressId;
           if (newSelectedId === id) {
-            newSelectedId = newAddresses.length > 0 ? newAddresses[0].id : null;
+            newSelectedId = newAddresses.length > 0 ? newAddresses?.[0]?.id : null;
           }
           return {
             addresses: newAddresses,

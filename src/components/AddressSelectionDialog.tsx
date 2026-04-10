@@ -13,17 +13,31 @@ import { useAddressStore } from '@/stores/address';
 import { cn } from '@/lib/utils';
 import { AddressDialog } from './AddressDialog';
 import { useState } from 'react';
+import { useSessionStore } from '@/stores/session';
+import { useCartStore } from '@/stores/cart';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 interface AddressSelectionDialogProps {
   trigger?: React.ReactNode;
 }
 
-export function AddressSelectionDialog({ trigger }: AddressSelectionDialogProps) {
+export function AddressSelectionDialog({ trigger }: Readonly<AddressSelectionDialogProps>) {
   const { addresses, selectedAddressId, setSelectedAddress, removeAddress } = useAddressStore();
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isSelectionOpen, setIsSelectionOpen] = useState(false);
+  const session = useSessionStore(s => s.session)
+  const cart = useCartStore(s => s.cart);
+  const router = useRouter();
 
-  const selectedAddress = addresses.find(a => a.id === selectedAddressId);
+  const handleAddAddress = () => {
+    if (!session?.email) {
+      const categorySlug = cart.products[0].categorySlug ?? '';
+      toast.error("Please login to add address");
+      return router.push(`/sign-in?redirect=/service/${categorySlug}`);
+    }
+    setIsAddOpen(true)
+  }
 
   return (
     <>
@@ -38,7 +52,7 @@ export function AddressSelectionDialog({ trigger }: AddressSelectionDialogProps)
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setIsAddOpen(true)}
+                onClick={handleAddAddress}
                 className="text-primary font-bold hover:bg-primary/10 rounded-full pr-4"
               >
                 <PlusIcon className="mr-1 h-4 w-4" /> Add New
@@ -56,46 +70,47 @@ export function AddressSelectionDialog({ trigger }: AddressSelectionDialogProps)
                   <p className="font-bold text-gray-900">No addresses yet</p>
                   <p className="text-sm text-gray-500">Add an address to proceed with your booking</p>
                 </div>
-                <Button onClick={() => setIsAddOpen(true)} className="rounded-full px-8 bg-primary text-white">
+                <Button onClick={handleAddAddress} className="rounded-full px-8 bg-primary text-white">
                   Add Address
                 </Button>
               </div>
             ) : (
               <div className="space-y-4">
                 {addresses.map((address) => (
-                  <button
-                    type='button'
-                    key={address.id}
-                    onClick={() => {
-                      setSelectedAddress(address.id);
-                      setIsSelectionOpen(false);
-                    }}
-                    className={cn(
-                      "group relative p-5 rounded-[2rem] border-2 transition-all cursor-pointer",
-                      selectedAddressId === address.id
-                        ? "border-primary bg-primary/5 shadow-md"
-                        : "border-gray-100 hover:border-gray-200 hover:bg-gray-50"
-                    )}
-                  >
-                    <div className="flex justify-between items-start pr-8">
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-black text-gray-900">{address.category || "Address"}</span>
-                          {selectedAddressId === address.id && (
-                            <span className="bg-primary text-white p-0.5 rounded-full">
-                              <CheckIcon size={12} />
-                            </span>
-                          )}
+                  <div key={address.id} className="relative group">
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setSelectedAddress(address.id);
+                        setIsSelectionOpen(false);
+                      }}
+                      className={cn(
+                        "w-full text-left p-5 rounded-4xl border-2 transition-all cursor-pointer",
+                        selectedAddressId === address.id
+                          ? "border-primary bg-primary/5 shadow-md"
+                          : "border-gray-100 hover:border-gray-200 hover:bg-gray-50"
+                      )}
+                    >
+                      <div className="flex justify-between items-start pr-8">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-black text-gray-900">{address.category || "Address"}</span>
+                            {selectedAddressId === address.id && (
+                              <span className="bg-primary text-white p-0.5 rounded-full">
+                                <CheckIcon size={12} />
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-500 font-medium leading-relaxed">
+                            {address.addressLine1}{address.addressLine2 ? `, ${address.addressLine2}` : ""}<br />
+                            {address.city}, {address.state} - {address.pincode}
+                          </p>
+                          <p className="text-sm text-gray-900 font-bold mt-2 flex items-center gap-2">
+                            {address.country}
+                          </p>
                         </div>
-                        <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                          {address.addressLine1}{address.addressLine2 ? `, ${address.addressLine2}` : ""}<br />
-                          {address.city}, {address.state} - {address.pincode}
-                        </p>
-                        <p className="text-sm text-gray-900 font-bold mt-2 flex items-center gap-2">
-                          {address.country}
-                        </p>
                       </div>
-                    </div>
+                    </button>
 
                     <button
                       type='button'
@@ -103,12 +118,12 @@ export function AddressSelectionDialog({ trigger }: AddressSelectionDialogProps)
                         e.stopPropagation();
                         removeAddress(address.id);
                       }}
-                      className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                      className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 rounded-full hover:bg-red-50"
                       aria-label="Delete address"
                     >
                       <Trash2Icon size={18} />
                     </button>
-                  </button>
+                  </div>
                 ))}
               </div>
             )}

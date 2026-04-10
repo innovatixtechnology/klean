@@ -59,49 +59,49 @@ export function AddressDialog({ trigger, open: controlledOpen, onOpenChange }: A
         <form action={formAction} className="px-8 pb-10 space-y-6">
           <div className="space-y-2">
             <Label htmlFor="houseNo" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">House No. / Flat / Building</Label>
-            <Input id="houseNo" name="addressLine1" required placeholder="A-123, Sunny Apartments" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+            <Input id="houseNo" name="addressLine1" required placeholder="A-123, Sunny Apartments" defaultValue={state?.addressLine1} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="area" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Area / Street / Sector</Label>
-            <Input id="area" name="addressLine2" required placeholder="Sector 45, Gurgaon" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+            <Input id="area" name="addressLine2" required placeholder="Sector 45, Gurgaon" defaultValue={state?.addressLine2} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="pincode" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Pincode</Label>
-              <Input id="pincode" name="pincode" required placeholder="110001" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+              <Input id="pincode" name="pincode" required placeholder="110001" defaultValue={state?.pincode} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="city" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">City</Label>
-              <Input id="city" name="city" required placeholder="New Delhi" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+              <Input id="city" name="city" readOnly value={"Vijayapura"} placeholder="New Delhi" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="state" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">State</Label>
-              <Input id="state" name="state" required placeholder="Delhi" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+              <Input id="state" readOnly name="state" value={"KARNATAKA"} placeholder="Vijayapura" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="country" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Country</Label>
-              <Input id="country" name="country" required placeholder="India" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+              <Input id="country" readOnly value={"INDIA"} name="country" placeholder="India" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="category" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Category</Label>
-              <Input id="category" name="category" required placeholder="Home" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+              <Input id="category" name="category" required placeholder="Home" defaultValue={state?.category} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="isDefault" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Is Default</Label>
               <div className="flex items-center gap-2">
-                <input type="checkbox" id="isDefault" name="isDefault" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+                <input type="checkbox" id="isDefault" name="isDefault" defaultChecked={state?.isDefault} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
                 <Label htmlFor="isDefault">Yes</Label>
               </div>
             </div>
           </div>
 
-          <Button isLoading={pending} disabled={pending} type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-full py-7 text-lg font-black shadow-xl shadow-primary/20 transition-all active:scale-95">
+          <Button isLoading={pending} disabled={pending} type="submit" className="w-full text-white">
             Save Address
           </Button>
         </form>

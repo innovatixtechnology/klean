@@ -19,7 +19,7 @@ export default function ServiceCart() {
   const session = useSessionStore(s => s.session);
   const [loading, toggleLoading] = useReducer(prev => !prev, false);
 
-  const selectedAddress = addresses.find(a => a.id === selectedAddressId);
+  const selectedAddress = addresses?.find?.(a => a.id === selectedAddressId);
 
   useEffect(() => {
     if (session?.id) {
@@ -38,13 +38,15 @@ export default function ServiceCart() {
         toast.error("Please add services to your cart");
         return;
       }
-      if (!selectedAddressId) {
-        toast.error("Please select an address");
-        return;
-      }
+
       if (!session?.email) {
         const categorySlug = cart.products[0].categorySlug ?? '';
         return router.push(`/sign-in?redirect=/service/${categorySlug}`);
+      }
+
+      if (!selectedAddressId) {
+        toast.error("Please select an address");
+        return;
       }
 
       toggleLoading();
