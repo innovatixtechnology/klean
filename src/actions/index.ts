@@ -1,13 +1,15 @@
 "use server"
 
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { unstable_cache as cache } from "next/cache";
 
 import { db } from "@/db"
 import {
   addresses, bookingItems, bookings, contacts,
   type NewBooking, type NewBookingItem, type NewContact,
-  subCategories, users, type NewAddress
+  subCategories, users, type NewAddress,
+  categories,
+  services
 } from "@/db/schema";
 import z4 from "zod/v4";
 import { redirect } from "next/navigation";
@@ -17,8 +19,10 @@ import { headers } from "next/headers";
 export const getAllCategories = cache(async () => {
   try {
     return await db.query.categories.findMany({
+      where: eq(categories.isActive, true),
       with: {
         subCategories: {
+          where: eq(subCategories.isActive, true),
           columns: {
             name: true,
             slug: true,
@@ -42,9 +46,11 @@ export const getAllCategories = cache(async () => {
 export const getServicesBySubCategory = cache(async (slug: string) => {
   try {
     return await db.query.subCategories.findMany({
-      where: eq(subCategories.slug, slug),
+      where: and(eq(subCategories.slug, slug), eq(subCategories.isActive, true)),
       with: {
-        services: true
+        services: {
+          where: eq(services.isActive, true),
+        }
       },
       columns: {
         name: true,

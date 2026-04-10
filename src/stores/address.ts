@@ -10,6 +10,7 @@ interface AddressState {
   >[];
   selectedAddressId: string | null;
   addAddress: (address: Address) => void;
+  setAddresses: (addresses: Address[]) => void;
   removeAddress: (id: string) => void;
   setSelectedAddress: (id: string) => void;
   updateAddress: (id: string, address: Partial<Address>) => void;
@@ -27,7 +28,12 @@ export const useAddressStore = create<AddressState>()(
           selectedAddressId: state.selectedAddressId ?? address.id,
         }));
       },
-
+      setAddresses: (addresses) => {
+        set((state) => ({
+          addresses: [...state.addresses, ...addresses],
+          selectedAddressId: state.selectedAddressId ?? addresses[0].id,
+        }));
+      },
       removeAddress: (id) => {
         set((state) => {
           const newAddresses = state.addresses.filter((a) => a.id !== id);

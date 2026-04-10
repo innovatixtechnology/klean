@@ -8,18 +8,29 @@ import { MapPinIcon, ArrowRightIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useReducer } from "react";
-import { createBooking } from "@/actions";
+import { useEffect, useReducer } from "react";
+import { createBooking, getUserProfile } from "@/actions";
 import { useSessionStore } from "@/stores/session";
 
 export default function ServiceCart() {
   const router = useRouter();
   const { updateQuantity, cart } = useCartStore();
-  const { addresses, selectedAddressId } = useAddressStore();
+  const { addresses, selectedAddressId, setAddresses } = useAddressStore();
   const session = useSessionStore(s => s.session);
   const [loading, toggleLoading] = useReducer(prev => !prev, false);
 
   const selectedAddress = addresses.find(a => a.id === selectedAddressId);
+
+  useEffect(() => {
+    if (session?.id) {
+      (async () => {
+        const res = await getUserProfile(session.id);
+        if (res.success) {
+          setAddresses(res.user?.addresses || []);
+        }
+      })()
+    }
+  }, [session?.id, setAddresses])
 
   const handleCheckout = async () => {
     try {
