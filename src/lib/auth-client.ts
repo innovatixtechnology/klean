@@ -4,7 +4,7 @@ import {
 import { createAuthClient } from "better-auth/react";
 import { toast } from "sonner";
 import type { auth } from "./auth";
-export const { signIn, signUp, signOut, useSession, getSession } =
+export const { signIn, signUp, signOut, useSession, getSession, accountInfo } =
   createAuthClient({
     plugins: [inferAdditionalFields<typeof auth>()],
     fetchOptions: {

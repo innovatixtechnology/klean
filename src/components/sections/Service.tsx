@@ -18,7 +18,7 @@ export default async function Service() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-6 gap-y-12">
         {data.map((service) => (
           <div key={service.slug} className="group relative flex flex-col items-center w-full">
             <Link href={`/service/${service.slug}` as Route} className="w-full h-full flex flex-col">

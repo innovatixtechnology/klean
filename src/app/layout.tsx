@@ -10,6 +10,7 @@ import Footer from "@/components/Layout/Footer";
 import { PostHogProvider } from "@/components/Analytics/PostHogProvider";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+import AppShell from "@/components/AppShell";
 
 export const metadata: Metadata = { ...rootMetadata };
 
@@ -44,13 +45,15 @@ export default async function RootLayout({ children, modal }: Readonly<Props>) {
         className={`${geistSans.variable} ${geistMono.variable} min-h-dvh antialiased`}>
         <NextTopLoader color="var(--primary)" showSpinner={false} />
         <Suspense fallback={null}>
-          <PostHogProvider>
-            <Header />
-            <main className="grow relative z-10">{children}</main>
-            {modal}
-            <Footer />
-            <ScrollToTop />
-          </PostHogProvider>
+          <AppShell>
+            <PostHogProvider>
+              <Header />
+              <main className="grow relative z-10">{children}</main>
+              {modal}
+              <Footer />
+              <ScrollToTop />
+            </PostHogProvider>
+          </AppShell>
         </Suspense>
         <Toaster position="top-right" />
       </body>

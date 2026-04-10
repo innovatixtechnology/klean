@@ -8,12 +8,14 @@ import NavMenu from "./NavMenu";
 import MobileNav from "./MobileNav";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut, useSession } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth-client";
+import { useSessionStore } from "@/stores/session";
 
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathName = usePathname();
-  const session = useSession();
+  const session = useSessionStore((s) => s.session);
+  const clearSession = useSessionStore(s => s.clearSession)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,11 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleSignOut = () => {
+    signOut();
+    clearSession()
+  }
 
   return (
     <header
@@ -39,8 +46,8 @@ export default function Header() {
           </Link>
         </div>
 
-        <NavMenu session={session.data} />
-        <MobileNav onSignOut={() => signOut()} session={session.data} />
+        <NavMenu session={session} />
+        <MobileNav onSignOut={handleSignOut} session={session} />
       </div>
     </header>
   );

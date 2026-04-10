@@ -16,10 +16,11 @@ import {
 } from "@/components/ui/menubar"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { signOut } from "@/lib/auth-client";
+import type { User } from "@/db/schema";
 
 interface NavMenuProps {
   className?: string;
-  session?: any;
+  session?: User | null;
 }
 
 export default function NavMenu({ className, session }: Readonly<NavMenuProps>) {
@@ -35,13 +36,13 @@ export default function NavMenu({ className, session }: Readonly<NavMenuProps>) 
           </li>
         ))}
         {
-          session?.user?.email ? (
+          session?.email ? (
             <Menubar className="bg-white">
               <MenubarMenu>
                 <MenubarTrigger>
                   <Avatar className='h-8 w-8 rounded-lg'>
-                    <AvatarImage src={session?.user?.image || ''} alt={`${session?.user?.name}`} />
-                    <AvatarFallback className='rounded-lg'>{session?.user?.name?.charAt?.(0)}</AvatarFallback>
+                    <AvatarImage src={session?.image || ''} alt={`${session?.firstName}`} />
+                    <AvatarFallback className='rounded-lg'>{session?.firstName?.charAt?.(0)}</AvatarFallback>
                   </Avatar>
                 </MenubarTrigger>
                 <MenubarContent className="bg-white">

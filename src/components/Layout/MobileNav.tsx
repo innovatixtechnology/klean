@@ -6,10 +6,11 @@ import { NAV_ITEMS, siteConfig } from "@/constants";
 import type { Route } from "next";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import type { User } from "@/db/schema";
 
 interface IProps {
   textColor?: string;
-  session?: any;
+  session?: User | null;
   onSignOut: () => void;
 }
 
@@ -62,7 +63,7 @@ export default function MobileNav({ textColor = '', session, onSignOut }: Readon
           </nav>
 
           <div className="pt-10">
-            {session?.user?.email ? <Link
+            {session?.email ? <Link
               href={"/sign-in" as Route}
               className="rounded-full bg-primary px-12 py-5 text-xl font-bold text-white shadow-2xl shadow-primary/30 transition-transform active:scale-95"
               onClick={() => onSignOut()}

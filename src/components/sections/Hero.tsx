@@ -6,10 +6,17 @@ import NavMenu from "../Layout/NavMenu";
 import MobileNav from "../Layout/MobileNav";
 import { t } from "@/i18n"
 import Link from "next/link";
-import { signOut, useSession } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth-client";
+import { useSessionStore } from "@/stores/session";
 
 export default function Hero() {
-  const session = useSession();
+  const session = useSessionStore((s) => s.session);
+  const clearSession = useSessionStore(s => s.clearSession)
+
+  const handleSignOut = () => {
+    signOut();
+    clearSession()
+  }
   return (
     <section id="hero" className="relative w-full h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
       {/* Background Layer with Premium Effects */}
@@ -46,8 +53,8 @@ export default function Hero() {
           </div>
 
           {/* Responsive Menu Navigation */}
-          <NavMenu className="text-white" session={session?.data} />
-          <MobileNav textColor="bg-white" session={session?.data} onSignOut={() => signOut()} />
+          <NavMenu className="text-white" session={session} />
+          <MobileNav textColor="bg-white" session={session} onSignOut={handleSignOut} />
 
         </nav>
       </header>
