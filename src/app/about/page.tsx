@@ -16,8 +16,8 @@ export default function About() {
           <div className="lg:col-span-5 relative group animate-fade-in delay-200">
             <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
                <Image 
-                  src="/images/founder.webp" 
-                  alt="Sanchita Dhariwal - Founder of Klean Company" 
+                src="/images/owners_images.png" 
+                alt="Sanchita Dhariwal - Founder of Klean Company" 
                   fill 
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
