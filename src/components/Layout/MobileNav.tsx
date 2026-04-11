@@ -46,7 +46,7 @@ export default function MobileNav({ textColor = '', session, onSignOut }: Readon
       >
         <div className="flex h-full flex-col items-center justify-center space-y-8 px-10 pt-20">
           <Link href="/" className="absolute top-8 left-8 text-3xl font-black text-white mix-blend-difference" onClick={() => setIsOpen(false)}>
-            <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} />
+            <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} className="w-full h-auto" />
           </Link>
 
           <nav className="flex w-full flex-col space-y-6 text-center">

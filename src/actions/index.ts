@@ -2,7 +2,6 @@
 
 import { and, eq } from "drizzle-orm";
 import { unstable_cache as cache } from "next/cache";
-
 import { db } from "@/db"
 import {
   addresses, bookingItems, bookings, contacts,
@@ -12,7 +11,6 @@ import {
   services
 } from "@/db/schema";
 import z4 from "zod/v4";
-import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -88,8 +86,6 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     const data = Object.fromEntries(formData.entries());
 
     const parsedData = addressSchema.safeParse(data);
-
-    console.log(parsedData, data)
 
     if (!parsedData.success) {
       return { success: false, error: parsedData.error.message, ...data };
@@ -202,7 +198,7 @@ export const createContact = async (formData: FormData) => {
 
     const result = await db.insert(contacts).values(contact).returning({ id: contacts.id });
     if (result?.[0]?.id) {
-      redirect('/')
+      return;
     }
     throw new Error("Failed to create contact");
   } catch (_error) {

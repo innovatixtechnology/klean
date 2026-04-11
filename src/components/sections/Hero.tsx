@@ -23,16 +23,16 @@ export default function Hero() {
       <div className="z-0 inset-0 absolute">
         {/* Mobile Hero Image */}
         <Image
-          src="/images/mobileherbanner.png"
+          src="/images/mobil-hero-banner.webp"
           alt="Klean Company Premium Cleaning"
           fill
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 0px"
           priority
           className="object-cover object-center md:hidden"
         />
         {/* Desktop Hero Image */}
         <Image
-          src="/images/hero-banner.png"
+          src="/images/hero-banner.webp"
           alt="Klean Company Premium Cleaning"
           fill
           sizes="100vw"
@@ -48,7 +48,7 @@ export default function Hero() {
         <nav className="flex items-center justify-between px-6 py-6 lg:px-16 lg:py-8">
           <div className="flex items-center mix-blend-screen bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
             <Link href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95">
-              <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} />
+              <Image src={siteConfig.logo.src} alt={siteConfig.logo.alt} width={150} height={150} className="w-full h-auto" />
             </Link>
           </div>
 

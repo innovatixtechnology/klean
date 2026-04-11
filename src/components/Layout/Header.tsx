@@ -42,7 +42,7 @@ export default function Header() {
       <div className="flex items-center justify-between px-6 lg:px-16 mx-auto max-w-[1920px]">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-3xl lg:text-4xl font-black tracking-tighter transition-all active:scale-95 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-            <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={150} height={150} />
+            <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={150} height={150} className="w-auto h-auto" />
           </Link>
         </div>
 

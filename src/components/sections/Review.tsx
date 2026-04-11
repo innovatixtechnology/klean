@@ -9,7 +9,7 @@ export default function Review() {
           <h2 className="text-[#121212] text-3xl md:text-5xl font-inter font-bold leading-tight">Love from our customers</h2>
           <div className="flex items-center mt-6">
             <div className="relative w-16 h-16 md:w-20 md:h-20">
-              <Image src="/images/gold-star.svg" alt="Star" fill sizes="(max-width: 768px) 64px, 80px" className="object-contain" />
+              <Image src="/images/gold-star.svg" alt="Star" fill sizes="(max-width: 768px) 64px, 80px" className="object-contain w-auto h-auto aspect-auto" />
             </div>
             <h2 className="text-5xl md:text-7xl font-extrabold ml-2">4.5</h2>
           </div>
@@ -26,7 +26,7 @@ export default function Review() {
               <li key={`top-${review.name}`} className="">
                 <div key={review.name} className="w-[85vw] md:w-[400px] shrink-0 p-6 shadow-xl bg-white rounded-2xl border border-gray-50">
                   <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} />)}
+                    {[1, 2, 3, 4, 5].map(s => <Image key={s} src="/images/gold-star.svg" alt="star" width={16} height={16} className="w-4 h-4 aspect-auto" />)}
                   </div>
                   <p className="text-[#646464] text-sm md:text-base font-inter">Klean Company services are absolutely amazing. I loved the experience at my own home!</p>
                   <p className="font-bold mt-4 text-[#121212]">{review.name}</p>

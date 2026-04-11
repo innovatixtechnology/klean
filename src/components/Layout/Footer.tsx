@@ -3,8 +3,10 @@ import { CheckCircleIcon, MailIcon, PhoneIcon } from "@/components/icons"
 import type { Route } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { getAllCategories } from "@/actions"
 
-function Footer() {
+async function Footer() {
+  const categories = await getAllCategories();
   return (
     <footer className="bg-[#F1F0F5] mt-20 pb-10">
       <div className="w-[90%] mx-auto ">
@@ -26,7 +28,7 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mt-12 gap-10 md:gap-8 border-b border-[#C6C6C6] pb-12">
           <div className="flex flex-col gap-4">
             <Link href="/" className="text-2xl font-black tracking-tight">
-              <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={200} height={200} />
+              <Image src={siteConfig.logo.src2} alt={siteConfig.logo.alt} width={200} height={200} className="w-auto h-auto" style={{ maxWidth: "13rem" }} />
             </Link>
             <p className="text-[#444] text-sm leading-relaxed max-w-sm">
               {siteConfig.description}
@@ -35,7 +37,6 @@ function Footer() {
 
           {
             FOOTER_LINKS.map((footer) => (
-
               <div key={footer.title} className="flex flex-col gap-6">
                 <p className="text-xl font-bold">{footer.title}</p>
                 <nav className="flex flex-col gap-3">
@@ -47,7 +48,14 @@ function Footer() {
             ))
 
           }
-
+          <div className="flex flex-col gap-6">
+            <p className="text-xl font-bold">{"Services"}</p>
+            <nav className="flex flex-col gap-3">
+              {categories.map((cat) => (
+                <Link key={cat.name} href={`/services/${cat.slug}` as Route} className="text-[#444] hover:text-primary transition-colors text-sm font-medium">{cat.name}</Link>
+              ))}
+            </nav>
+          </div>
           <div className="flex flex-col gap-6">
             <p className="text-xl font-bold">Support</p>
             <div className="bg-[#E6E3EE]/50 p-6 rounded-4xl border border-[#E6E3EE]">
