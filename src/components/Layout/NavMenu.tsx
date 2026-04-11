@@ -15,15 +15,15 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { signOut } from "@/lib/auth-client";
 import type { User } from "@/db/schema";
 
 interface NavMenuProps {
   className?: string;
   session?: User | null;
+  onSignOut: () => void;
 }
 
-export default function NavMenu({ className, session }: Readonly<NavMenuProps>) {
+export default function NavMenu({ className, session, onSignOut }: Readonly<NavMenuProps>) {
   return (
     <nav className={cn("hidden md:flex items-center")}>
       <ul className="flex flex-row gap-4 xl:gap-8 text-sm xl:text-base font-bold text-foreground uppercase tracking-wider">
@@ -47,7 +47,7 @@ export default function NavMenu({ className, session }: Readonly<NavMenuProps>) 
                 </MenubarTrigger>
                 <MenubarContent className="bg-white">
                   <MenubarGroup>
-                    <MenubarItem onSelect={() => signOut()}>
+                    <MenubarItem onSelect={onSignOut}>
                       Sign Out
                     </MenubarItem>
                   </MenubarGroup>
@@ -62,7 +62,7 @@ export default function NavMenu({ className, session }: Readonly<NavMenuProps>) 
             </li>
           )
         }
-        <MobileNav session={session} onSignOut={() => signOut()} />
+        <MobileNav session={session} onSignOut={onSignOut} />
       </ul>
     </nav>
   );

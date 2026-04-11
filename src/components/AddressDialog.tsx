@@ -15,6 +15,7 @@ import { MapPinIcon } from '@/components/icons';
 import { useAddressStore } from '@/stores/address';
 import { updateUserAddress } from '@/actions';
 import { toast } from 'sonner';
+import { useSessionStore } from '@/stores/session';
 
 interface AddressDialogProps {
   trigger?: React.ReactNode;
@@ -24,6 +25,7 @@ interface AddressDialogProps {
 
 export function AddressDialog({ trigger, open: controlledOpen, onOpenChange }: AddressDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
+  const user = useSessionStore((state) => state.session);
   const open = controlledOpen ?? internalOpen;
   const setOpen = onOpenChange ?? setInternalOpen;
 
@@ -57,6 +59,16 @@ export function AddressDialog({ trigger, open: controlledOpen, onOpenChange }: A
         </DialogHeader>
 
         <form action={formAction} className="px-8 pb-10 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Name</Label>
+              <Input id="name" name="name" defaultValue={state?.name || `${user?.firstName ?? ''} ${user?.lastName ?? ''}`} required placeholder="John Doe" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Phone</Label>
+              <Input id="phone" name="phone" defaultValue={state?.phone || user?.phoneNumber || ''} required placeholder="1234567890" className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />
+            </div>
+          </div>
           <div className="space-y-2">
             <Label htmlFor="houseNo" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">House No. / Flat / Building</Label>
             <Input id="houseNo" name="addressLine1" required placeholder="A-123, Sunny Apartments" defaultValue={state?.addressLine1} className="rounded-2xl border-gray-100 bg-gray-50/50 py-5 focus:bg-white" />

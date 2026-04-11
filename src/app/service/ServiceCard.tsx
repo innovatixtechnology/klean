@@ -71,7 +71,7 @@ export default async function ServiceCard({ service, slug, category, subCategory
           {/* Actions */}
           <footer className="mt-6 flex gap-3">
             <Link
-              href={`/service/${category}?category=${subCategory}&slug=${service.slug}`}
+              href={`/service/${category}/${subCategory}?slug=${service.slug}`}
               className="px-5 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-bold text-sm hover:border-primary hover:text-primary transition-all active:scale-95"
             >
               View Details

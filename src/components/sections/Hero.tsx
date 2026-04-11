@@ -53,7 +53,7 @@ export default function Hero() {
           </div>
 
           {/* Responsive Menu Navigation */}
-          <NavMenu className="text-white" session={session} />
+          <NavMenu className="text-white" session={session} onSignOut={handleSignOut} />
           <MobileNav textColor="bg-white" session={session} onSignOut={handleSignOut} />
 
         </nav>

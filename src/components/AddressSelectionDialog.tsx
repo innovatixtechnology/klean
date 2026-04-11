@@ -13,10 +13,6 @@ import { useAddressStore } from '@/stores/address';
 import { cn } from '@/lib/utils';
 import { AddressDialog } from './AddressDialog';
 import { useState } from 'react';
-import { useSessionStore } from '@/stores/session';
-import { useCartStore } from '@/stores/cart';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 
 interface AddressSelectionDialogProps {
   trigger?: React.ReactNode;
@@ -26,16 +22,13 @@ export function AddressSelectionDialog({ trigger }: Readonly<AddressSelectionDia
   const { addresses, selectedAddressId, setSelectedAddress, removeAddress } = useAddressStore();
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isSelectionOpen, setIsSelectionOpen] = useState(false);
-  const session = useSessionStore(s => s.session)
-  const cart = useCartStore(s => s.cart);
-  const router = useRouter();
 
   const handleAddAddress = () => {
-    if (!session?.email) {
-      const categorySlug = cart.products[0].categorySlug ?? '';
-      toast.error("Please login to add address");
-      return router.push(`/sign-in?redirect=/service/${categorySlug}`);
-    }
+    // if (!session?.email) {
+    //   const categorySlug = cart.products[0].categorySlug ?? '';
+    //   toast.error("Please login to add address");
+    //   return router.push(`/sign-in?redirect=/service/${categorySlug}`);
+    // }
     setIsAddOpen(true)
   }
 

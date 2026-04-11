@@ -11,8 +11,8 @@ import {
   services
 } from "@/db/schema";
 import z4 from "zod/v4";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 export const getAllCategories = cache(async () => {
   try {
@@ -25,6 +25,7 @@ export const getAllCategories = cache(async () => {
             name: true,
             slug: true,
             image: true,
+            description: true,
           }
         }
       },
@@ -71,6 +72,8 @@ const addressSchema = z4.object({
   country: z4.string().min(1, "Country is required"),
   category: z4.string().min(1, "Category is required"),
   isDefault: z4.boolean().default(false),
+  name: z4.string().min(1, "Name is required"),
+  phone: z4.string().min(1, "Phone is required"),
 })
 
 export const updateUserAddress = async (_prevState: any, formData: FormData) => {
@@ -78,10 +81,11 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     const session = await auth.api.getSession({
       headers: await headers()
     });
-    if (!session?.user?.id) {
-      const data = Object.fromEntries(formData.entries());
-      return { success: false, error: "Authentication required", ...data };
-    }
+    
+    // if (!session?.user?.id) {
+    //   const data = Object.fromEntries(formData.entries());
+    //   return { success: false, error: "Authentication required", ...data };
+    // }
 
     const data = Object.fromEntries(formData.entries());
 
@@ -92,7 +96,7 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     }
 
     const address: NewAddress = {
-      userId: session?.user?.id,
+      userId: session?.user?.id ?? null,
       addressLine1: String(parsedData.data.addressLine1 ?? "").trim(),
       addressLine2: String(parsedData.data.addressLine2 ?? "").trim(),
       city: String(parsedData.data.city ?? "").trim(),
@@ -101,6 +105,8 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
       country: String(parsedData.data.country ?? "").trim(),
       category: String(parsedData.data.category ?? "").trim(),
       isDefault: parsedData.data.isDefault,
+      name: String(parsedData.data.name ?? "").trim(),
+      phone: String(parsedData.data.phone ?? "").trim(),
     };
 
     const result = await db.insert(addresses).values(address).returning();
@@ -151,11 +157,12 @@ export const createBooking = async (booking: Omit<NewBooking, 'userId' | 'id'> &
       headers: await headers()
     });
 
-    if (!session?.user?.id) {
-      return { success: false, error: "Authentication required" };
-    }
+    // if (!session?.user?.id) {
+    //   return { success: false, error: "Authentication required" };
+    // }
+
     const result = await db.insert(bookings).values({
-      userId: session?.user?.id,
+      userId: session?.user?.id ?? null,
       addressId: booking.addressId,
     }).returning({ id: bookings.id });
     if (result?.[0]?.id) {

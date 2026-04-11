@@ -46,7 +46,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <NavMenu session={session} />
+        <NavMenu session={session} onSignOut={handleSignOut} />
         <MobileNav onSignOut={handleSignOut} session={session} />
       </div>
     </header>

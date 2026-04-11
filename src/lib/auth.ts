@@ -6,12 +6,8 @@ import { db } from "@/db";
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
-    async sendResetPassword({ user, url }) {
-      console.log(user, url);
-    },
     autoSignIn: true,
   },
-  socialProviders: {},
   rateLimit: {
     enabled: true,
     max: 10,
@@ -104,8 +100,5 @@ export const auth = betterAuth({
     database: {
       generateId: false,
     },
-  },
-  logger: {
-    level: "debug",
   },
 });

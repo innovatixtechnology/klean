@@ -7,7 +7,7 @@ interface AddressState {
   addresses: Omit<
     Address,
     "createdAt" | "updatedAt"
-  >[];
+  >[] & { name?: string, phone?: string };
   selectedAddressId: string | null;
   addAddress: (address: Address) => void;
   setAddresses: (addresses: Address[]) => void;
@@ -24,13 +24,21 @@ export const useAddressStore = create<AddressState>()(
 
       addAddress: (address) => {
         set((state) => ({
-          addresses: [...state.addresses, address],
+          addresses: Array.from(
+            new Map(
+              [...state.addresses, address].map((a) => [a.id, a])
+            ).values()
+          ),
           selectedAddressId: state.selectedAddressId ?? address.id,
         }));
       },
       setAddresses: (addresses) => {
         set((state) => ({
-          addresses: [...state.addresses, ...addresses],
+          addresses: Array.from(
+            new Map(
+              [...state.addresses, ...addresses].map((a) => [a.id, a])
+            ).values()
+          ),
           selectedAddressId: state.selectedAddressId ?? addresses?.[0]?.id,
         }));
       },

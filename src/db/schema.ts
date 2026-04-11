@@ -125,6 +125,8 @@ export const professionals = createTable("professionals", {
 export const addresses = createTable("addresses", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+  name: varchar("name", { length: 100 }),
+  phone: varchar("phone", { length: 15 }),
   addressLine1: varchar("address_line_1", { length: 500 }),
   addressLine2: varchar("address_line_2", { length: 500 }),
   city: varchar("city", { length: 100 }),
@@ -165,7 +167,7 @@ export const bookingStatusEnum = pgEnum("booking_status", [
 
 export const bookings = createTable("bookings", {
   id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
   professionalId: uuid("professional_id").references(() => professionals.id, { onDelete: "set null" }),
   addressId: uuid("address_id").references(() => addresses.id).notNull(),
   status: bookingStatusEnum("status").default("PENDING"),
