@@ -32,6 +32,8 @@ export default function ServiceCart() {
 
   const handleCheckout = async () => {
     try {
+      toggleLoading();
+
       if (cart.products.length === 0) {
         toast.error("Please add services to your cart");
         return;
@@ -47,7 +49,6 @@ export default function ServiceCart() {
         return;
       }
 
-      toggleLoading();
       const res = await createBooking({
         addressId: selectedAddressId,
         items: cart.products.map((item) => ({

@@ -92,7 +92,7 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     const parsedData = addressSchema.safeParse(data);
 
     if (!parsedData.success) {
-      return { success: false, error: parsedData.error.message, ...data };
+      return { success: false, error: "Invalid address", ...data };
     }
 
     const address: NewAddress = {
@@ -194,7 +194,7 @@ export const createContact = async (formData: FormData) => {
     const parsedData = contactSchema.safeParse(data);
 
     if (!parsedData.success) {
-      throw new Error(parsedData.error.message);
+      throw new Error("Invalid contact");
     }
 
     const contact: NewContact = {
