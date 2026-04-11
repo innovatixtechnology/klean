@@ -13,7 +13,7 @@ type Props = {
   subCategory?: string;
 };
 
-export default async function ServiceCard({ service, slug, category, subCategory }: Props) {
+export default async function ServiceCard({ service, slug, category, subCategory }: Readonly<Props>) {
   return (
     <>
       <article
@@ -22,14 +22,19 @@ export default async function ServiceCard({ service, slug, category, subCategory
         )}
       >
         {/* Image (non-button, purely visual OR wrap in link if navigates) */}
-        <div className="relative w-full md:w-48 h-48 rounded-3xl overflow-hidden shrink-0">
+        <div className="relative w-full md:w-48 h-48 rounded-3xl overflow-hidden shrink-0 bg-gray-100">
           {service.images?.[0] ? <Image
             src={service.images[0]}
             alt={service.name}
             fill
-            sizes="(max-width: 768px) 100vw, 200px"
+            sizes="(max-width: 768px) 100vw, 192px"
             className="object-cover transition-transform duration-700 group-hover:scale-110"
-          /> : null}
+            priority={false}
+          /> : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
+              <span className="text-4xl">📷</span>
+            </div>
+          )}
 
           {service.images && service.images.length > 1 && (
             <span className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded-full backdrop-blur-sm">

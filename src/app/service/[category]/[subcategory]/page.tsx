@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: IProps) {
   };
 }
 
-export default async function ServicePage({ params, searchParams }: IProps) {
+export default async function ServicePage({ params, searchParams }: Readonly<IProps>) {
   const data = await getAllCategories();
 
   const { category: categorySlug } = await params;
@@ -98,7 +98,7 @@ export default async function ServicePage({ params, searchParams }: IProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <section id={categorySlug} className="bg-gray-50/50 min-h-screen font-inter">
-        <div className="mx-auto max-w-[1920px] px-6 lg:px-16 flex gap-10 h-[calc(100vh-70px)] sticky top-[70px] overflow-hidden">
+        <div className="mx-auto max-w-fit px-6 lg:px-16 flex gap-10 h-[calc(100vh-70px)] sticky top-[70px] overflow-hidden">
           {/* LEFT: Fixed Categories Sidebar */}
           <aside className="hidden lg:flex flex-col w-72 h-full overflow-y-auto pt-10 border-r border-gray-200 pr-8 scrollbar-hide">
             <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Categories</h2>
@@ -108,10 +108,10 @@ export default async function ServicePage({ params, searchParams }: IProps) {
                   key={cat.slug}
                   href={`/service/${category.slug}/${cat.slug}` as Route}
                   className={cn(
-                    "p-4 rounded-2xl text-sm font-semibold transition-all duration-300",
+                    "p-4 rounded-2xl text-sm font-semibold transition-all duration-300 transform",
                     subCategory === cat.slug
                       ? "bg-primary text-white shadow-xl shadow-primary/20 scale-105"
-                      : "text-gray-600 hover:bg-white hover:shadow-md hover:scale-[1.02] active:scale-95"
+                      : "text-gray-600 hover:bg-white hover:shadow-md active:scale-95"
                   )}
                 >
                   {cat.name}
@@ -128,9 +128,9 @@ export default async function ServicePage({ params, searchParams }: IProps) {
                   href={`/service/${category.slug}/${cat.slug}` as Route}
                   className={cn(
                     "px-5 py-2.5 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-300",
-                    category.slug === cat.slug
+                    subCategory === cat.slug
                       ? "bg-primary text-white shadow-md shadow-primary/20"
-                      : "bg-white text-gray-600 border border-gray-100 shadow-sm"
+                      : "bg-white text-gray-600 border border-gray-100 shadow-sm hover:shadow-md"
                   )}
                 >
                   {cat.name}

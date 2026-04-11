@@ -81,8 +81,12 @@ export default function ServiceCart() {
           <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide flex flex-col gap-4 mb-6">
             {cart.products.map((item) => (
               <div key={item.productId} className="flex gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors group">
-                <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 shadow-sm">
-                  {item.images?.[0]?.src ? <Image src={item.images?.[0]?.src} alt={item.name} fill sizes="64px" className="object-cover" /> : null}
+                <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-gray-100">
+                  {item.images?.[0]?.src ? <Image src={item.images?.[0]?.src} alt={item.name} fill sizes="64px" className="object-cover" /> : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <span className="text-2xl">📷</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-sm text-gray-900 truncate">{item.name}</h4>
