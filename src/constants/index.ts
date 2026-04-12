@@ -147,11 +147,11 @@ export const FOOTER_LINKS = [
       },
       {
         text: "Book Now",
-        href: "/book-now"
+        href: "/#services"
       },
       {
         text: "FAQs",
-        href: "/faqs"
+        href: "/contact"
       }
     ]
   },
