@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 export default function TermsOfServicePage() {
   return (
     <section id="terms-of-service" className="page py-16 md:py-24">

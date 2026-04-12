@@ -5,7 +5,7 @@ const baseConfig: NextConfig = {
   reactCompiler: true,
   typedRoutes: true,
   reactStrictMode: true,
-  cacheComponents: true,
+  // cacheComponents: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   compress: true,

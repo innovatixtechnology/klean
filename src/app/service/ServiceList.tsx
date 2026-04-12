@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export default async function ServiceList({ subCategory, slug, category }: IProps) {
-  const [data = { services: [] }] = await getServicesBySubCategory(subCategory);
+  const data = await getServicesBySubCategory(subCategory);
   return (
     <div className="grid gap-6">
       {data?.services?.map((service) => (

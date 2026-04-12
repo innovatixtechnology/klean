@@ -3,6 +3,8 @@ import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/icons";
 import { siteConfig } from "@/constants";
 import Image from "next/image";
 
+export const dynamic = "force-static";
+
 export default function ContactPage() {
   return (
     <section id="contact" className="bg-white min-h-screen">

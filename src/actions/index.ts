@@ -44,22 +44,25 @@ export const getAllCategories = cache(async () => {
 
 export const getServicesBySubCategory = cache(async (slug: string) => {
   try {
-    return await db.query.subCategories.findMany({
+    return await db.query.subCategories.findFirst({
       where: and(eq(subCategories.slug, slug), eq(subCategories.isActive, true)),
+      orderBy: (subCategories, { asc }) => [asc(subCategories.name)],
       with: {
         services: {
           where: eq(services.isActive, true),
+          orderBy: (services, { asc }) => [asc(services.name)],
         }
       },
       columns: {
         name: true,
         slug: true,
         image: true,
+        description: true,
       }
     });
   } catch (_error) {
     console.log(_error)
-    return [];
+    return null;
   }
 })
 

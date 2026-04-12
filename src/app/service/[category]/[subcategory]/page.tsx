@@ -9,6 +9,8 @@ import MobileCheckout from "../../MobileCheckout";
 import { siteConfig } from "@/constants";
 import Script from "next/script";
 
+export const dynamic = "force-static";
+
 interface IProps {
   params: Promise<{ category: string, subcategory: string }>;
   searchParams: Promise<{
@@ -40,12 +42,12 @@ export async function generateMetadata({ params }: IProps) {
   }
 
   const title = `${sub.name} Services in India | ${siteConfig.name}`;
-  const description =
-    sub.name + " services by " + cat.name + ". Book now.";
+  const description = `${sub.name} services by ${cat.name}. Book now.`;
 
   return {
     title,
     description,
+    keywords: [sub.name, cat.name, "services", "Vijayapura"],
     openGraph: {
       title,
       description,
@@ -57,7 +59,10 @@ export async function generateMetadata({ params }: IProps) {
     },
     alternates: {
       canonical: `/service/${category}/${subcategory}`,
-    }
+      languages: {
+        "en": `/service/${category}/${subcategory}`,
+      },
+    },
   };
 }
 

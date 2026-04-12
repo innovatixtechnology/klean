@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 export default function PrivacyPolicyPage() {
   return (
     <section id="privacy-policy" className="page py-16 md:py-24">

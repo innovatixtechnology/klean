@@ -52,7 +52,7 @@ async function Footer() {
             <p className="text-xl font-bold">{"Services"}</p>
             <nav className="flex flex-col gap-3">
               {categories.map((cat) => (
-                <Link key={cat.name} href={`/services/${cat.slug}` as Route} className="text-[#444] hover:text-primary transition-colors text-sm font-medium">{cat.name}</Link>
+                <Link key={cat.name} href={`/service/${cat.slug}` as Route} className="text-[#444] hover:text-primary transition-colors text-sm font-medium">{cat.name}</Link>
               ))}
             </nav>
           </div>
