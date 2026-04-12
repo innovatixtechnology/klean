@@ -8,7 +8,8 @@ import {
   type NewBooking, type NewBookingItem, type NewContact,
   subCategories, users, type NewAddress,
   categories,
-  services
+  services,
+  blocks
 } from "@/db/schema";
 import z4 from "zod/v4";
 import { headers } from "next/headers";
@@ -74,7 +75,7 @@ const addressSchema = z4.object({
   pincode: z4.string().min(1, "Pincode is required"),
   country: z4.string().min(1, "Country is required"),
   category: z4.string().min(1, "Category is required"),
-  isDefault: z4.boolean().default(false),
+  isDefault: z4.string().optional(),
   name: z4.string().min(1, "Name is required"),
   phone: z4.string().min(1, "Phone is required"),
 })
@@ -84,7 +85,7 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
     const session = await auth.api.getSession({
       headers: await headers()
     });
-    
+
     // if (!session?.user?.id) {
     //   const data = Object.fromEntries(formData.entries());
     //   return { success: false, error: "Authentication required", ...data };
@@ -107,7 +108,7 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
       pincode: String(parsedData.data.pincode ?? "").trim(),
       country: String(parsedData.data.country ?? "").trim(),
       category: String(parsedData.data.category ?? "").trim(),
-      isDefault: parsedData.data.isDefault,
+      isDefault: parsedData.data.isDefault === "on",
       name: String(parsedData.data.name ?? "").trim(),
       phone: String(parsedData.data.phone ?? "").trim(),
     };
@@ -214,5 +215,17 @@ export const createContact = async (formData: FormData) => {
   } catch (_error) {
     console.log(_error)
     throw new Error("Failed to create contact");
+  }
+}
+
+export const checkIsBlocked = async (type: "IP" | "EMAIL" | "PHONE", value: string) => {
+  try {
+    const result = await db.query.blocks.findFirst({
+      where: and(eq(blocks.type, type), eq(blocks.value, value)),
+    });
+    return !!result;
+  } catch (_error) {
+    console.log(_error)
+    return true;
   }
 }

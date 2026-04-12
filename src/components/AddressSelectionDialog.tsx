@@ -36,7 +36,7 @@ export function AddressSelectionDialog({ trigger }: Readonly<AddressSelectionDia
     <>
       <Dialog open={isSelectionOpen} onOpenChange={setIsSelectionOpen}>
         {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-        <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-lg p-0 overflow-hidden sm:rounded-[2.5rem] border-none bg-white shadow-2xl flex flex-col max-h-[85vh]">
+        <DialogContent aria-describedby="Select Address" className="max-w-[calc(100%-2rem)] sm:max-w-lg p-0 overflow-hidden sm:rounded-[2.5rem] border-none bg-white shadow-2xl flex flex-col max-h-[85vh]">
           <DialogHeader className="px-8 pt-8 pb-4 shrink-0">
             <div className="flex justify-between items-center">
               <DialogTitle className="text-2xl font-black flex items-center gap-3 tracking-tight">

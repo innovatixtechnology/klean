@@ -2,6 +2,8 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
 import { db } from "@/db";
+import { createAuthMiddleware } from "better-auth/api";
+import { checkIsBlocked } from "@/actions";
 
 export const auth = betterAuth({
   emailAndPassword: {
@@ -71,8 +73,8 @@ export const auth = betterAuth({
     // before: createAuthMiddleware(async (ctx) => {
     //   // 1. Check IP address
     //   const ip =
-    //     ctx.request.headers.get("x-forwarded-for")?.split(",")[0] ||
-    //     ctx.request.headers.get("x-real-ip") ||
+    //     ctx.request?.headers.get("x-forwarded-for")?.split(",")[0] ||
+    //     ctx.request?.headers.get("x-real-ip") ||
     //     "unknown";
 
     //   if (ip !== "unknown" && (await checkIsBlocked("IP", ip))) {

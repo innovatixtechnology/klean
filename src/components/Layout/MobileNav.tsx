@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { NAV_ITEMS, siteConfig } from "@/constants";
+import { NAV_ITEMS } from "@/constants";
 import type { Route } from "next";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import type { User } from "@/db/schema";
+import { siteConfig } from "@/config";
 
 interface IProps {
   textColor?: string;

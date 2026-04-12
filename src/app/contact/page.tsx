@@ -1,6 +1,6 @@
 import { ContactForm } from "@/components/ContactForm";
 import { MailIcon, PhoneIcon, MapPinIcon } from "@/components/icons";
-import { siteConfig } from "@/constants";
+import { siteConfig } from "@/config";
 import Image from "next/image";
 
 export const dynamic = "force-static";

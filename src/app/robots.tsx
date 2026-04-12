@@ -1,7 +1,7 @@
 export const revalidate = false;
 
 import type { MetadataRoute } from "next";
-import { siteConfig } from "../../config";
+import { siteConfig } from "@/config";
 
 export default function robots(): MetadataRoute.Robots {
   return {

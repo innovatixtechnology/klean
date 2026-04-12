@@ -6,7 +6,7 @@ import type { Route } from "next";
 import ServiceList from "../../ServiceList";
 import ServiceCart from "../../ServiceCart";
 import MobileCheckout from "../../MobileCheckout";
-import { siteConfig } from "@/constants";
+import { siteConfig } from "@/config";
 import Script from "next/script";
 
 export const dynamic = "force-static";

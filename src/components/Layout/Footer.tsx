@@ -1,9 +1,10 @@
-import { siteConfig, FOOTER_LINKS, FOOTER_TURSTS } from "@/constants"
+import { FOOTER_LINKS, FOOTER_TURSTS } from "@/constants"
 import { CheckCircleIcon, MailIcon, PhoneIcon } from "@/components/icons"
 import type { Route } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { getAllCategories } from "@/actions"
+import { siteConfig } from "@/config"
 
 async function Footer() {
   const categories = await getAllCategories();

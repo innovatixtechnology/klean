@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { siteConfig } from "@/constants";
+import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
 import NavMenu from "./NavMenu";
 import MobileNav from "./MobileNav";

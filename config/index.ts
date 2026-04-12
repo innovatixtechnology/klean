@@ -2,24 +2,32 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "Klean Company",
-  shortName: "KC",
-  description: "Beautifully designed template.",
+  logo: {
+    src: "/logo-4.webp",
+    src2: "/logo-3.webp",
+    alt: "Klean Company Logo",
+  },
+  shortName: "Klean Company",
+  description: "Klean Company is your trusted partner for premium home services - from cleaning and repairs to grooming and everyday essentials. We are commited to delivering quality, conveninance, and a seamless experiance to modern homes.",
+  contact: {
+    phone: "+91 9036529150",
+    phoneHref: "tel:+919036529150",
+    whatsappHref: "https://wa.me/919036529150?text=Hi%20Klean%2C%20I%20want%20to%20book%20a%20service",
+    email: "kleancompany19@gmail.com",
+    emailHref: "mailto:kleancompany19@gmail.com",
+  },
   emoji: "🧙",
   backgroundColor: "#fff",
   themeColor: "#000",
-  siteUrl: "https://Klean.com",
-  category: "Klean Company",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+  siteUrl: "https://kleancompany.com",
+  category: "Home Services",
   links: {
-    twitter: "https://twitter.com/Klean",
-    telegram: "https://t.me/Klean",
-    github: "https://github.com/Klean",
-    docs: "https://docs.Klean.com",
+    twitter: "https://twitter.com",
+    telegram: "https://t.me/klean",
+    github: "https://github.com/klean",
+    docs: "https://docs.klean.com",
+    facebook: "https://www.facebook.com",
+    instagram: "https://www.instagram.com",
   },
 };
 

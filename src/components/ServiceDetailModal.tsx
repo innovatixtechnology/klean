@@ -38,7 +38,7 @@ export function ServiceDetailModal({ service, open }: IProps) {
 
   return (
     <Dialog open={open} onOpenChange={(open) => !open && router.back()}>
-      <DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-3xl p-0 overflow-hidden sm:rounded-[3rem] border-none bg-white max-h-[95dvh] flex flex-col gap-0 shadow-2xl">
+      <DialogContent aria-describedby={`${service.name} details`} className="max-w-[calc(100%-2rem)] sm:max-w-3xl p-0 overflow-hidden sm:rounded-[3rem] border-none bg-white max-h-[95dvh] flex flex-col gap-0 shadow-2xl">
         <DialogHeader className="sr-only">
           <DialogTitle>{service.name}</DialogTitle>
         </DialogHeader>

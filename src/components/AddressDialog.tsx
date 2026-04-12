@@ -48,7 +48,7 @@ export function AddressDialog({ trigger, open: controlledOpen, onOpenChange }: R
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-      <DialogContent className="max-w-[calc(100%-1rem)] sm:max-w-[calc(100%-2rem)] md:max-w-lg p-0 overflow-hidden sm:rounded-[2.5rem] border-none bg-white shadow-2xl mx-2 sm:mx-4 max-h-[75vh] flex flex-col">
+      <DialogContent aria-describedby="Add New Address" className="max-w-[calc(100%-1rem)] sm:max-w-[calc(100%-2rem)] md:max-w-lg p-0 overflow-hidden sm:rounded-[2.5rem] border-none bg-white shadow-2xl mx-2 sm:mx-4 max-h-[75vh] flex flex-col">
         <DialogHeader className="px-4 sm:px-8 pt-6 sm:pt-8 pb-3 sm:pb-4 shrink-0">
           <DialogTitle className="text-xl sm:text-2xl font-black flex items-center gap-2 sm:gap-3 tracking-tight">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-primary/10 text-primary flex items-center justify-center">

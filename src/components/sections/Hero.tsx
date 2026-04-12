@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { siteConfig } from "@/constants";
+import { siteConfig } from "@/config";
 import NavMenu from "../Layout/NavMenu";
 import MobileNav from "../Layout/MobileNav";
 import { t } from "@/i18n"

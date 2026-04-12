@@ -12,7 +12,7 @@ export default function ModalLayout({ children }: Readonly<IProps>) {
     const pathname = usePathname();
     return (
         <Dialog defaultOpen onOpenChange={router.back}>
-            <DialogContent className={cn('w-full max-h-[98svh] overflow-y-auto', !AUTH_PATHS.has(pathname) ? 'sm:max-w-3xl' : '')}>
+            <DialogContent aria-describedby="Authentication" className={cn('w-full max-h-[98svh] overflow-y-auto', !AUTH_PATHS.has(pathname) ? 'sm:max-w-3xl' : '')}>
                 <DialogHeader>
                     <DialogTitle className="hidden">Auth</DialogTitle>
                 </DialogHeader>
