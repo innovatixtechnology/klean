@@ -17,7 +17,7 @@ import { auth } from "@/lib/auth";
 
 export const getAllCategories = cache(async () => {
   try {
-    return await db.query.categories.findMany({
+    const data = await db.query.categories.findMany({
       where: eq(categories.isActive, true),
       with: {
         subCategories: {
@@ -37,6 +37,8 @@ export const getAllCategories = cache(async () => {
         description: true,
       }
     });
+    console.log('getAllCategories', JSON.stringify(data));
+    return data;
   } catch (_error) {
     console.log(_error)
     return [];

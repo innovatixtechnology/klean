@@ -10,7 +10,7 @@ const baseConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   compress: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    // removeConsole: process.env.NODE_ENV === "production",
     reactRemoveProperties: {
       properties: ["data-reactid", "data-reactroot"],
     },
