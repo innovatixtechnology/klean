@@ -1,7 +1,6 @@
 "use server"
 
 import { and, eq } from "drizzle-orm";
-import { unstable_cache as cache } from "next/cache";
 import { db } from "@/db"
 import {
   addresses, bookingItems, bookings, contacts,
@@ -15,7 +14,7 @@ import z4 from "zod/v4";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
-export const getAllCategories = cache(async () => {
+export const getAllCategories = async () => {
   try {
     const data = await db.query.categories.findMany({
       where: eq(categories.isActive, true),
@@ -43,9 +42,9 @@ export const getAllCategories = cache(async () => {
     console.log(_error)
     return [];
   }
-})
+}
 
-export const getServicesBySubCategory = cache(async (slug: string) => {
+export const getServicesBySubCategory = async (slug: string) => {
   try {
     return await db.query.subCategories.findFirst({
       where: and(eq(subCategories.slug, slug), eq(subCategories.isActive, true)),
@@ -67,7 +66,7 @@ export const getServicesBySubCategory = cache(async (slug: string) => {
     console.log(_error)
     return null;
   }
-})
+}
 
 const addressSchema = z4.object({
   addressLine1: z4.string().min(1, "Address Line 1 is required"),
@@ -129,7 +128,7 @@ export const updateUserAddress = async (_prevState: any, formData: FormData) => 
   }
 }
 
-export const getUserProfile = cache(async (userId: string) => {
+export const getUserProfile = async (userId: string) => {
   try {
     const result = await db.query.users.findFirst({
       where: eq(users.id, userId),
@@ -155,7 +154,6 @@ export const getUserProfile = cache(async (userId: string) => {
     return { error: "Failed to get user profile", success: false };
   }
 }
-)
 
 export const createBooking = async (booking: Omit<NewBooking, 'userId' | 'id'> & { items: NewBookingItem[] }) => {
   try {
