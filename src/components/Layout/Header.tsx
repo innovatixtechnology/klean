@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { Route } from "next";
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
 import NavMenu from "./NavMenu";
@@ -10,12 +11,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "@/lib/auth-client";
 import { useSessionStore } from "@/stores/session";
+import { useCartStore } from "@/stores/cart";
+import { ShoppingCartIcon } from "@/components/icons";
 
 export default function Header() {
   const [show, setShow] = useState(false);
   const pathName = usePathname();
   const session = useSessionStore((s) => s.session);
   const clearSession = useSessionStore(s => s.clearSession)
+  const totalCount = useCartStore((s) => s.cart.totalProductsCount);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +51,21 @@ export default function Header() {
         </div>
 
         <NavMenu session={session} onSignOut={handleSignOut} />
-        <MobileNav onSignOut={handleSignOut} session={session} />
+        <div className="flex items-center gap-1 md:hidden">
+          <Link
+            href={"/cart" as Route}
+            aria-label="View cart"
+            className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary/10 transition-colors"
+          >
+            <ShoppingCartIcon className="w-5 h-5 text-foreground" />
+            {totalCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center">
+                {totalCount > 99 ? "99+" : totalCount}
+              </span>
+            )}
+          </Link>
+          <MobileNav onSignOut={handleSignOut} session={session} />
+        </div>
       </div>
     </header>
   );
