@@ -4,15 +4,16 @@ import { AddressSelectionDialog } from "@/components/AddressSelectionDialog";
 import { useAddressStore } from "@/stores/address";
 import { useCartStore } from "@/stores/cart";
 import { cn, formatCurrency } from "@/lib/utils";
-import { useReducer } from "react";
+import { useCallback, useReducer, useState } from "react";
 import { toast } from "sonner";
 import { createBooking } from "@/actions";
+import { BookingSuccessPopup } from "@/components/BookingSuccessPopup";
 
 export default function MobileCheckout() {
   const { cart } = useCartStore();
   const { selectedAddressId } = useAddressStore();
   const [loading, toggleLoading] = useReducer(prev => !prev, false);
-
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleCheckout = async () => {
     try {
@@ -43,7 +44,7 @@ export default function MobileCheckout() {
 
       if (res.success) {
         useCartStore.getState().clearCart();
-        toast.success("Booking created successfully");
+        setShowSuccess(true);
       } else {
         toast.error(res.error);
       }
@@ -55,38 +56,43 @@ export default function MobileCheckout() {
     }
   };
 
+  const closeSuccess = useCallback(() => setShowSuccess(false), []);
+
   return (
-    <div className="xl:hidden fixed bottom-6 left-4 right-4 p-4 bg-white border border-gray-100 rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] z-40">
-      <AddressSelectionDialog
-        trigger={
+    <>
+      <BookingSuccessPopup show={showSuccess} onClose={closeSuccess} />
+      <div className="xl:hidden fixed bottom-6 left-4 right-4 p-4 bg-white border border-gray-100 rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] z-40">
+        <AddressSelectionDialog
+          trigger={
+            <button
+              type="button"
+              className={cn(
+                "px-8 py-3.5 w-full rounded-2xl font-black shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 text-center",
+                selectedAddressId ? "bg-primary/70 text-white" : "bg-primary/10 text-primary"
+              )}
+            >
+              {selectedAddressId ? "Change Address" : "Add Address"}
+            </button>
+          }
+        />
+        <div className="flex mt-4 items-center justify-between gap-4">
+          <div className="flex flex-col pl-2">
+            <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">{cart.totalProductsCount} items</span>
+            <span className="text-xl font-black text-gray-900 leading-tight">{formatCurrency(cart.totalProductsPrice)}</span>
+          </div>
           <button
             type="button"
+            onClick={handleCheckout}
+            disabled={loading}
             className={cn(
-              "px-8 py-3.5 w-full rounded-2xl font-black shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 text-center",
-              selectedAddressId ? "bg-primary/70 text-white" : "bg-primary/10 text-primary"
+              "px-8 py-3.5 rounded-2xl font-black shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 max-w-[200px] text-center",
+              selectedAddressId ? "bg-primary text-white" : "bg-primary/10 text-primary"
             )}
           >
-            {selectedAddressId ? "Change Address" : "Add Address"}
+            {loading ? "Loading..." : "Checkout"}
           </button>
-        }
-      />
-      <div className="flex mt-4 items-center justify-between gap-4">
-        <div className="flex flex-col pl-2">
-          <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">{cart.totalProductsCount} items</span>
-          <span className="text-xl font-black text-gray-900 leading-tight">{formatCurrency(cart.totalProductsPrice)}</span>
         </div>
-        <button
-          type="button"
-          onClick={handleCheckout}
-          disabled={loading}
-          className={cn(
-            "px-8 py-3.5 rounded-2xl font-black shadow-lg shadow-primary/25 transition-transform active:scale-95 flex-1 max-w-[200px] text-center",
-            selectedAddressId ? "bg-primary text-white" : "bg-primary/10 text-primary"
-          )}
-        >
-          {loading ? "Loading..." : "Checkout"}
-        </button>
       </div>
-    </div>
+    </>
   )
 }
