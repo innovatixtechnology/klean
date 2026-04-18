@@ -6,6 +6,8 @@ import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
 import MobileNav from "./MobileNav";
 import Link from "next/link";
+import { useCartStore } from "@/stores/cart";
+import { ShoppingCartIcon } from "@/components/icons";
 import {
   Menubar,
   MenubarContent,
@@ -24,6 +26,8 @@ interface NavMenuProps {
 }
 
 export default function NavMenu({ className, session, onSignOut }: Readonly<NavMenuProps>) {
+  const totalCount = useCartStore((s) => s.cart.totalProductsCount);
+
   return (
     <nav className={cn("hidden md:flex items-center")}>
       <ul className="flex flex-row gap-4 xl:gap-8 text-sm xl:text-base font-bold text-foreground uppercase tracking-wider">
@@ -35,6 +39,20 @@ export default function NavMenu({ className, session, onSignOut }: Readonly<NavM
             </NavigationLink>
           </li>
         ))}
+        <li className="relative">
+          <Link
+            href={"/cart" as Route}
+            aria-label="View cart"
+            className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary/10 transition-colors"
+          >
+            <ShoppingCartIcon className="w-5 h-5 text-foreground" />
+            {totalCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center">
+                {totalCount > 99 ? "99+" : totalCount}
+              </span>
+            )}
+          </Link>
+        </li>
         {
           session?.email ? (
             <Menubar className="bg-white">

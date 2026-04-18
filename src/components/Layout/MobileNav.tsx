@@ -8,6 +8,8 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import type { User } from "@/db/schema";
 import { siteConfig } from "@/config";
+import { useCartStore } from "@/stores/cart";
+import { ShoppingCartIcon } from "@/components/icons";
 
 interface IProps {
   textColor?: string;
@@ -17,6 +19,7 @@ interface IProps {
 
 export default function MobileNav({ textColor = '', session, onSignOut }: Readonly<IProps>) {
   const [isOpen, setIsOpen] = useState(false);
+  const totalCount = useCartStore((s) => s.cart.totalProductsCount);
 
   useEffect(() => {
     if (isOpen) {
@@ -61,6 +64,18 @@ export default function MobileNav({ textColor = '', session, onSignOut }: Readon
                 {item.text}
               </Link>
             ))}
+            <Link
+              href={"/cart" as Route}
+              onClick={() => setIsOpen(false)}
+              className="text-3xl font-black text-white hover:text-primary transition-colors tracking-tighter flex items-center justify-center gap-3"
+            >
+              Cart
+              {totalCount > 0 && (
+                <span className="min-w-7 h-7 px-2 bg-primary text-white text-sm font-black rounded-full flex items-center justify-center">
+                  {totalCount > 99 ? "99+" : totalCount}
+                </span>
+              )}
+            </Link>
           </nav>
 
           <div className="pt-10">
