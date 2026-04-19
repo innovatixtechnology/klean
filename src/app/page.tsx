@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import Achievements from "@/components/sections/Achievements";
 import Banner from "@/components/sections/Banner";
 import Hero from "@/components/sections/Hero";

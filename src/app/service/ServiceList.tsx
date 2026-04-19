@@ -7,7 +7,7 @@ interface IProps {
   category?: string;
 }
 
-export default async function ServiceList({ subCategory, slug, category }: IProps) {
+export default async function ServiceList({ subCategory, category }: IProps) {
   const data = await getServicesBySubCategory(subCategory);
   return (
     <div className="grid gap-6">
@@ -15,7 +15,6 @@ export default async function ServiceList({ subCategory, slug, category }: IProp
         <ServiceCard
           key={service.id}
           service={service}
-          slug={slug}
           category={category}
           subCategory={subCategory}
         />

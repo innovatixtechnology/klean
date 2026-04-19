@@ -1,6 +1,7 @@
-import { Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
+export const dynamic = "force-static";
 
 function AuthLayout({ children }: Readonly<IProps>) {
   return (
@@ -9,7 +10,7 @@ function AuthLayout({ children }: Readonly<IProps>) {
         <div className="w-full max-w-sm md:max-w-lg">
           <Card className={cn("overflow-hidden p-0")}>
             <CardContent className="p-6 md:p-8">
-              <Suspense>{children}</Suspense>
+              {children}
             </CardContent>
           </Card>
         </div>

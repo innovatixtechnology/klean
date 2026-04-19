@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import Image from "next/image";
 
 export default function About() {

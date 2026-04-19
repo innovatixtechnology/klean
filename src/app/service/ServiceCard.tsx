@@ -1,19 +1,20 @@
-import Image from "next/image";
+"use client"
 
+import { useState } from "react";
+import Image from "next/image";
 import AddToCart from "@/components/AddToCart";
 import type { Service } from "@/db/schema";
 import { cn, formatCurrency } from "@/lib/utils";
 import { ServiceDetailModal } from "@/components/ServiceDetailModal";
-import Link from "next/link";
 
 type Props = {
   service: Service;
-  slug?: string;
   category?: string;
   subCategory?: string;
 };
 
-export default async function ServiceCard({ service, slug, category, subCategory }: Readonly<Props>) {
+export default function ServiceCard({ service, category, subCategory }: Readonly<Props>) {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <article
@@ -75,12 +76,13 @@ export default async function ServiceCard({ service, slug, category, subCategory
 
           {/* Actions */}
           <footer className="mt-6 flex gap-3">
-            <Link
-              href={`/service/${category}/${subCategory}?slug=${service.slug}`}
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
               className="px-5 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-bold text-sm hover:border-primary hover:text-primary transition-all active:scale-95"
             >
               View Details
-            </Link>
+            </button>
 
             <div className="flex-1">
               <AddToCart
@@ -106,7 +108,8 @@ export default async function ServiceCard({ service, slug, category, subCategory
           categorySlug: category ?? '',
           subCategorySlug: subCategory ?? '',
         }}
-        open={slug === service.slug}
+        onOpenChange={setOpen}
+        open={open}
       />
     </>
   );

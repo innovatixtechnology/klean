@@ -2,6 +2,8 @@ import type { Route } from "next";
 import { notFound, redirect } from "next/navigation";
 import { getAllCategories } from "@/actions";
 
+export const dynamic = "force-static";
+
 interface IProps {
   params: Promise<{ category: string }>;
 }

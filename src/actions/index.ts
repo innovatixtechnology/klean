@@ -36,7 +36,6 @@ export const getAllCategories = async () => {
         description: true,
       }
     });
-    console.log('getAllCategories', JSON.stringify(data));
     return data;
   } catch (_error) {
     console.log(_error)

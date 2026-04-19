@@ -10,17 +10,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useRouter } from 'next/navigation';
 import type { Service } from '@/db/schema';
 
 interface IProps {
   service: Service & { categorySlug: string; subCategorySlug: string };
   open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export function ServiceDetailModal({ service, open }: IProps) {
+export function ServiceDetailModal({ service, open, onOpenChange }: IProps) {
   const [activeImg, setActiveImg] = useState(0);
-  const router = useRouter();
 
   const handlePrev = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -37,7 +36,7 @@ export function ServiceDetailModal({ service, open }: IProps) {
   if (!service) return null;
 
   return (
-    <Dialog open={open} onOpenChange={(open) => !open && router.back()}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent aria-describedby={`${service.name} details`} className="max-w-[calc(100%-2rem)] sm:max-w-3xl p-0 overflow-hidden sm:rounded-[3rem] border-none bg-white max-h-[95dvh] flex flex-col gap-0 shadow-2xl">
         <DialogHeader className="sr-only">
           <DialogTitle>{service.name}</DialogTitle>

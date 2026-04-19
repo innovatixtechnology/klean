@@ -147,7 +147,7 @@ export default async function ServicePage({ params, searchParams }: Readonly<IPr
               <h1 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-4">{category.name}</h1>
               <p className="text-gray-500 text-lg">Choose from our premium packages and professional services.</p>
             </div>
-            <ServiceList subCategory={subCategory} slug={slug} category={categorySlug} />
+            <ServiceList subCategory={subCategory} category={categorySlug} />
           </div>
           {/* RIGHT: Fixed Summary Sidebar */}
           <ServiceCart />
