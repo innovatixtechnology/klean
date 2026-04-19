@@ -1,0 +1,1 @@
+ALTER TABLE "KLEAN_bookings" ADD COLUMN "additional_info" jsonb;

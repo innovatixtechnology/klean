@@ -173,6 +173,7 @@ export const bookings = createTable("bookings", {
   status: bookingStatusEnum("status").default("PENDING"),
   assignedAt: timestamp("assigned_at", { withTimezone: true }),
   completedAt: timestamp("completed_at", { withTimezone: true }),
+  additionalInfo: jsonb("additional_info"), // { scheduledAt: string }
   ...timestamps,
 }, (table) => [
   index("bookings_userId_idx").on(table.userId),

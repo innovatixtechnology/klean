@@ -9,7 +9,6 @@ import { Button } from "../ui/button";
 import type { User } from "@/db/schema";
 import { siteConfig } from "@/config";
 import { useCartStore } from "@/stores/cart";
-import { ShoppingCartIcon } from "@/components/icons";
 
 interface IProps {
   textColor?: string;

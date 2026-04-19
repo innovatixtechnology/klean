@@ -36,6 +36,13 @@
       "when": 1775899958665,
       "tag": "0004_clean_dragon_man",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1776583007949,
+      "tag": "0005_magical_king_bedlam",
+      "breakpoints": true
     }
   ]
 }

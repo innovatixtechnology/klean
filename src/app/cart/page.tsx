@@ -11,6 +11,7 @@ import { useSessionStore } from "@/stores/session";
 import { createBooking, getUserProfile } from "@/actions";
 import { AddressSelectionDialog } from "@/components/AddressSelectionDialog";
 import { BookingSuccessPopup } from "@/components/BookingSuccessPopup";
+import { ServiceDatePicker } from "@/components/ServiceDatePicker";
 import {
     ShoppingCartIcon,
     Trash2Icon,
@@ -22,12 +23,13 @@ import {
 import { cn } from "@/lib/utils";
 
 export default function CartPage() {
-    const { cart, updateQuantity, removeProduct } = useCartStore();
+    const { cart, updateQuantity, removeProduct, serviceDate: serviceDateStr } = useCartStore();
     const { addresses, selectedAddressId, setAddresses } = useAddressStore();
     const session = useSessionStore((s) => s.session);
     const [loading, toggleLoading] = useReducer((prev) => !prev, false);
     const [showSuccess, setShowSuccess] = useState(false);
 
+    const serviceDate = serviceDateStr ? new Date(serviceDateStr) : null;
     const selectedAddress = addresses?.find((a) => a.id === selectedAddressId);
 
     useEffect(() => {
@@ -55,8 +57,14 @@ export default function CartPage() {
                 return;
             }
 
+            if (!serviceDate) {
+                toast.error("Please select a date and time for service");
+                return;
+            }
+
             const res = await createBooking({
                 addressId: selectedAddressId,
+                scheduledAt: serviceDate,
                 items: cart.products.map((item) => ({
                     serviceId: item.productId,
                     quantity: item.qty,
@@ -240,47 +248,50 @@ export default function CartPage() {
                                     {/* Address */}
                                     <div>
                                         <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                                            Delivery Address
+                                            Schedule & Location
                                         </p>
-                                        <AddressSelectionDialog
-                                            trigger={
-                                                <button
-                                                    type="button"
-                                                    className="w-full flex items-center gap-3 p-3.5 rounded-xl border border-dashed border-gray-300 hover:border-primary/50 hover:bg-primary/5 transition-all text-left"
-                                                >
-                                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                                                        <MapPinIcon className="w-4 h-4 text-primary" />
-                                                    </div>
-                                                    <div className="min-w-0">
-                                                        {selectedAddress ? (
-                                                            <>
-                                                                <p className="font-bold text-sm text-gray-900 truncate">
-                                                                    {selectedAddress.addressLine1}
-                                                                </p>
-                                                                <p className="text-xs text-gray-500 truncate">
-                                                                    {[
-                                                                        selectedAddress.city,
-                                                                        selectedAddress.state,
-                                                                        selectedAddress.pincode,
-                                                                    ]
-                                                                        .filter(Boolean)
-                                                                        .join(", ")}
-                                                                </p>
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <p className="font-bold text-sm text-gray-900">
-                                                                    Select Address
-                                                                </p>
-                                                                <p className="text-xs text-gray-400 italic">
-                                                                    Required for checkout
-                                                                </p>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </button>
-                                            }
-                                        />
+                                        <div className="flex flex-col gap-3">
+                                            <ServiceDatePicker />
+                                            <AddressSelectionDialog
+                                                trigger={
+                                                    <button
+                                                        type="button"
+                                                        className="w-full flex items-center gap-3 p-3.5 rounded-xl border border-dashed border-gray-300 hover:border-primary/50 hover:bg-primary/5 transition-all text-left"
+                                                    >
+                                                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                                            <MapPinIcon className="w-4 h-4 text-primary" />
+                                                        </div>
+                                                        <div className="min-w-0">
+                                                            {selectedAddress ? (
+                                                                <>
+                                                                    <p className="font-bold text-sm text-gray-900 truncate">
+                                                                        {selectedAddress.addressLine1}
+                                                                    </p>
+                                                                    <p className="text-xs text-gray-500 truncate">
+                                                                        {[
+                                                                            selectedAddress.city,
+                                                                            selectedAddress.state,
+                                                                            selectedAddress.pincode,
+                                                                        ]
+                                                                            .filter(Boolean)
+                                                                            .join(", ")}
+                                                                    </p>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <p className="font-bold text-sm text-gray-900">
+                                                                        Select Address
+                                                                    </p>
+                                                                    <p className="text-xs text-gray-400 italic">
+                                                                        Required for checkout
+                                                                    </p>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </button>
+                                                }
+                                            />
+                                        </div>
                                     </div>
 
                                     {/* Checkout button */}
@@ -289,12 +300,13 @@ export default function CartPage() {
                                         disabled={
                                             cart.products.length === 0 ||
                                             !selectedAddressId ||
+                                            !serviceDate ||
                                             loading
                                         }
                                         onClick={handleCheckout}
                                         className={cn(
                                             "w-full py-4 rounded-full font-black text-base transition-all transform active:scale-95 shadow-xl",
-                                            cart.products.length > 0 && selectedAddressId
+                                            cart.products.length > 0 && selectedAddressId && serviceDate
                                                 ? "bg-primary text-white hover:bg-primary/90 shadow-primary/25 cursor-pointer"
                                                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
                                         )}
@@ -303,6 +315,8 @@ export default function CartPage() {
                                             ? "Processing..."
                                             : !selectedAddressId
                                                 ? "Select Address to Continue"
+                                                : !serviceDate
+                                                ? "Select Date & Time"
                                                 : "Proceed to Checkout"}
                                     </button>
 

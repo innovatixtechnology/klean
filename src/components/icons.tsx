@@ -28,5 +28,7 @@ export {
     ChevronUpIcon,
     MenuIcon,
     LogInIcon,
-    CheckCircleIcon
+    CheckCircleIcon,
+    CalendarIcon,
+    ClockIcon,
 } from 'lucide-react';

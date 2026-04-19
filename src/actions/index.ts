@@ -154,7 +154,7 @@ export const getUserProfile = async (userId: string) => {
   }
 }
 
-export const createBooking = async (booking: Omit<NewBooking, 'userId' | 'id'> & { items: NewBookingItem[] }) => {
+export const createBooking = async (booking: Omit<NewBooking, 'userId' | 'id'> & { items: NewBookingItem[], scheduledAt: Date }) => {
   try {
     const session = await auth.api.getSession({
       headers: await headers()
@@ -167,6 +167,7 @@ export const createBooking = async (booking: Omit<NewBooking, 'userId' | 'id'> &
     const result = await db.insert(bookings).values({
       userId: session?.user?.id ?? null,
       addressId: booking.addressId,
+      additionalInfo: { scheduledAt: booking.scheduledAt.toISOString() },
     }).returning({ id: bookings.id });
     if (result?.[0]?.id) {
       await db.insert(bookingItems).values(booking.items.map((item) => ({

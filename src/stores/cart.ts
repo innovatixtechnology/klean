@@ -27,8 +27,10 @@ interface Cart {
 
 interface CartState {
   cart: Cart;
+  serviceDate: string | null;
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
+  setServiceDate: (date: Date | null) => void;
   addProduct: (product: CartProduct) => void;
   removeProduct: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -54,6 +56,7 @@ export const useCartStore = create<CartState>()(
         totalProductsCount: 0,
         totalProductsPrice: 0,
       },
+      serviceDate: null,
       isLoading: false,
 
       setLoading: (loading) => set({ isLoading: loading }),
@@ -98,14 +101,20 @@ export const useCartStore = create<CartState>()(
         set({ cart: { products: newProducts, ...calculateTotals(newProducts) } });
       },
 
+      setServiceDate: (date) => set({ serviceDate: date ? date.toISOString() : null }),
+      
       clearCart: () =>
         set({
           cart: { products: [], totalProductsCount: 0, totalProductsPrice: 0 },
+          serviceDate: null,
         }),
     }),
     {
       name: STORAGE_KEY.CART,
-      partialize: (state) => ({ cart: state.cart }),
+      partialize: (state) => ({ 
+        cart: state.cart,
+        serviceDate: state.serviceDate 
+      }),
     }
   )
 );
