@@ -8,7 +8,6 @@ import { useCallback, useReducer, useState } from "react";
 import { toast } from "sonner";
 import { createBooking } from "@/actions";
 import { BookingSuccessPopup } from "@/components/BookingSuccessPopup";
-
 import { ServiceDatePicker } from "@/components/ServiceDatePicker";
 
 export default function MobileCheckout() {
