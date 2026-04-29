@@ -5,7 +5,7 @@ import { useCartStore } from "@/stores/cart";
 import { useAddressStore } from "@/stores/address";
 import { AddressSelectionDialog } from "@/components/AddressSelectionDialog";
 import { MapPinIcon, ArrowRightIcon } from "@/components/icons";
-import { cn } from "@/lib/utils";
+import { cn, MIN_CART_VALUE } from "@/lib/utils";
 import { toast } from "sonner";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import { createBooking, getUserProfile } from "@/actions";
@@ -41,6 +41,11 @@ export default function ServiceCart() {
 
       if (cart.products.length === 0) {
         toast.error("Please add services to your cart");
+        return;
+      }
+
+      if (cart.totalProductsPrice < MIN_CART_VALUE) {
+        toast.error(`Minimum cart value is ₹${MIN_CART_VALUE}`);
         return;
       }
 
@@ -190,8 +195,8 @@ export default function ServiceCart() {
                     {loading ? "Loading..." : !selectedAddressId
                       ? "Select Address"
                       : !serviceDate
-                      ? "Select Date & Time"
-                      : "Proceed to Checkout"}
+                        ? "Select Date & Time"
+                        : "Proceed to Checkout"}
                   </button>
                 </div>
               </div>

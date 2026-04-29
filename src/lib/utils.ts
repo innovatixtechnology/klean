@@ -193,3 +193,5 @@ export async function convertImageToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
+
+export const MIN_CART_VALUE = 300;

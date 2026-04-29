@@ -20,7 +20,7 @@ import {
     MapPinIcon,
     ArrowRightIcon,
 } from "@/components/icons";
-import { cn } from "@/lib/utils";
+import { cn, MIN_CART_VALUE } from "@/lib/utils";
 
 export default function CartPage() {
     const { cart, updateQuantity, removeProduct, serviceDate: serviceDateStr } = useCartStore();
@@ -49,6 +49,11 @@ export default function CartPage() {
 
             if (cart.products.length === 0) {
                 toast.error("Please add services to your cart");
+                return;
+            }
+
+            if (cart.totalProductsPrice < MIN_CART_VALUE) {
+                toast.error(`Minimum cart value is ₹${MIN_CART_VALUE}`);
                 return;
             }
 

@@ -3,7 +3,7 @@
 import { AddressSelectionDialog } from "@/components/AddressSelectionDialog";
 import { useAddressStore } from "@/stores/address";
 import { useCartStore } from "@/stores/cart";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency, MIN_CART_VALUE } from "@/lib/utils";
 import { useCallback, useReducer, useState } from "react";
 import { toast } from "sonner";
 import { createBooking } from "@/actions";
@@ -23,6 +23,11 @@ export default function MobileCheckout() {
       toggleLoading();
       if (cart.products.length === 0) {
         toast.error("Please add services to your cart");
+        return;
+      }
+
+      if (cart.totalProductsPrice < MIN_CART_VALUE) {
+        toast.error(`Minimum cart value is ₹${MIN_CART_VALUE}`);
         return;
       }
 
