@@ -9,7 +9,7 @@ import { siteConfig } from "@/config"
 async function Footer() {
   const categories = await getAllCategories();
   return (
-    <footer className="bg-[#F1F0F5] mt-20 pb-10">
+    <footer className="bg-[#EEF4FB] mt-20 pb-10">
       <div className="w-[90%] mx-auto ">
         <div className="pt-10 border-b border-[#C6C6C6] pb-8">
           <p className="flex items-center gap-2 text-base font-semibold">
@@ -59,7 +59,7 @@ async function Footer() {
           </div>
           <div className="flex flex-col gap-6">
             <p className="text-xl font-bold">Support</p>
-            <div className="bg-[#E6E3EE]/50 p-6 rounded-4xl border border-[#E6E3EE]">
+            <div className="bg-[#D9E8F8]/50 p-6 rounded-4xl border border-[#D9E8F8]">
               <p className="text-sm font-bold text-gray-800 mb-2">Need Help?</p>
               <a href={siteConfig.contact.phoneHref} className="text-primary hover:underline text-sm font-bold transition-all inline-flex items-center gap-2"><PhoneIcon /> {siteConfig.contact.phone}</a>
               <a href={siteConfig.contact.emailHref} className="text-primary hover:underline text-sm font-bold transition-all inline-flex items-center gap-2 break-all"><MailIcon /> {siteConfig.contact.email}</a>
@@ -69,7 +69,7 @@ async function Footer() {
 
           <div className="flex flex-col gap-6">
             <p className="text-xl font-bold">Trust & Safety</p>
-            <div className="bg-[#E6E3EE]/50 p-6 rounded-4xl border border-[#E6E3EE]">
+            <div className="bg-[#D9E8F8]/50 p-6 rounded-4xl border border-[#D9E8F8]">
               {
                 FOOTER_TURSTS.map((it) => (
                   <p key={it} className="text-sm flex items-center gap-2 font-bold text-gray-800 mb-2">
