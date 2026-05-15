@@ -85,15 +85,15 @@ async function Footer() {
             <p className="text-xl font-bold w-full">Stay Connected</p>
             <p className="text-sm text-gray-600 font-medium">Follow us for updates, offers and tips 🩷</p>
             <div className="flex gap-4 mt-2">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
+              <Link href="https://www.instagram.com/kleancompany/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
                 <Image src="/images/instagram.svg" alt="Instagram" width={20} height={20} />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
+              </Link>
+              {/* <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
                 <Image src="/images/whatsapp.svg" alt="whatsapp" width={20} height={20} />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
+              </div> */}
+              <Link href="https://www.facebook.com/profile.php?id=61584987145302" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100 cursor-pointer hover:border-primary transition-all">
                 <Image src="/images/facebook.svg" alt="facebook" width={20} height={20} />
-              </div>
+              </Link>
             </div>
           </div>
           <div className="mt-4">
