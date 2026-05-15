@@ -21,7 +21,7 @@ export default function Achievements() {
               <div className="absolute inset-0 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-700" />
               
               {/* Icon Container */}
-              <div className="relative bg-gradient-to-b from-[#FFEBF2] to-white rounded-[40px] md:rounded-[50px] p-8 md:p-10 border border-primary/5 shadow-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-primary/5">
+              <div className="relative bg-gradient-to-b from-[#EBF2FF] to-white rounded-[40px] md:rounded-[50px] p-8 md:p-10 border border-primary/5 shadow-sm transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-primary/5">
                 <CheckCircleIcon className="text-primary size-10 md:size-12 stroke-[1.5px]" />
               </div>
             </div>

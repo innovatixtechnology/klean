@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 export const siteConfig = {
   name: "Klean Company",
   logo: {
-    src: "/logo-4.webp",
-    src2: "/logo-3.webp",
+    src: "/klean-logo-transparent.png",
+    src2: "/klean-logo-light.png",
     alt: "Klean Company Logo",
   },
   shortName: "Klean Company",
@@ -18,7 +18,7 @@ export const siteConfig = {
   },
   emoji: "🧙",
   backgroundColor: "#fff",
-  themeColor: "#000",
+  themeColor: "#013984",
   siteUrl: "https://kleancompany.com",
   category: "Home Services",
   links: {

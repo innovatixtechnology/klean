@@ -59,7 +59,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social Links Mini-Grid */}
-            <div className="mt-4 flex gap-4">
+            {/* <div className="mt-4 flex gap-4">
               {['instagram', 'whatsapp', 'facebook'].map((social) => (
                 <a
                   key={social}
@@ -71,7 +71,7 @@ export default function ContactPage() {
                   <Image src={`/images/${social}.svg`} alt={social} width={24} height={24} />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column: Contact Form */}
